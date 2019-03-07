@@ -3,7 +3,6 @@ import {RideListService} from './ride-list.service';
 import {Ride} from './ride';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
-import {AddRideComponent} from './add-ride.component';
 
 @Component({
   selector: 'ride-list-component',
@@ -34,36 +33,6 @@ export class RideListComponent implements OnInit {
     return ride._id['$oid'] === this.highlightedID;
   }
 
-  openDialog(): void {
-    const newRide: Ride = {_id: '',
-      driver: '',
-      seats_available: -1,
-      start_location: '',
-      end_location: '',
-      departure_date: '',
-      departure_time: '',
-    };
-    const dialogRef = this.dialog.open(AddRideComponent, {
-      width: '500px',
-      data: {ride: newRide}
-    });
-
-    dialogRef.afterClosed().subscribe(newRide => {
-      if (newRide != null) {
-        this.rideListService.addNewRide(newRide).subscribe(
-          result => {
-            this.highlightedID = result;
-            this.refreshRides();
-          },
-          err => {
-            // This should probably be turned into some sort of meaningful response.
-            console.log('There was an error adding the ride.');
-            console.log('The newRide or dialogResult was ' + newRide);
-            console.log('The error was ' + JSON.stringify(err));
-          });
-      }
-    });
-  }
 /*
   public filterRides(searchName: string, searchAge: number): Ride[] {
 
@@ -103,7 +72,6 @@ export class RideListComponent implements OnInit {
     rides.subscribe(
       rides => {
         this.rides = rides;
-        this.filterRides(this.rideName, this.rideAge);
       },
       err => {
         console.log(err);
