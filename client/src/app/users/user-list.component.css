@@ -7,3 +7,16 @@
   padding-right: 14px;
 }
 
+.mat-card-header-text {
+  margin: 0;
+}
+
+.cardlist  {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.users {
+  flex-basis: 48%;
+}
