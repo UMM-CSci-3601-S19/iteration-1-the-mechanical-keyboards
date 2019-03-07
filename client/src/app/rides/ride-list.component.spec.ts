@@ -55,8 +55,6 @@ describe('Ride list', () => {
     TestBed.configureTestingModule({
       imports: [CustomModule],
       declarations: [RideListComponent],
-      // providers:    [ RideListService ]  // NO! Don't provide the real service!
-      // Provide a test-double instead
       providers: [{provide: RideListService, useValue: rideListServiceStub}]
     });
   });
