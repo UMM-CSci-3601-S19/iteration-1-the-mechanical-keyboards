@@ -19,6 +19,8 @@ import {CustomModule} from './custom.module';
 
 import {AddUserComponent} from './users/add-user.component';
 
+import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   imports: [
@@ -26,6 +28,7 @@ import {AddUserComponent} from './users/add-user.component';
     HttpClientModule,
     Routing,
     CustomModule,
+    MatCardModule,
   ],
   declarations: [
     AppComponent,
@@ -37,6 +40,7 @@ import {AddUserComponent} from './users/add-user.component';
     UserComponent,
 
     AddUserComponent,
+
   ],
   providers: [
     UserListService,RideListService,

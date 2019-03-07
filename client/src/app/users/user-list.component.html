@@ -6,39 +6,40 @@
 <div layout-gt-sm="row">
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card>
-      <mat-card-title id="user-list-title">Users</mat-card-title>
+      <mat-card-title id="user-list-title">Rides</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>
-        <mat-form-field>
-          <input matInput id="userName" #input type="text" placeholder="Filter by name"
-                 (input)="userName = $event.target.value">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput id="userAge" #input type="number" placeholder="Filter by age"
-                 (input)="userAge = $event.target.value">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput id="userCompany" #input type="search" placeholder="Search for company"
-                 [(ngModel)]="userCompany"/>
-          <button mat-button id="companyClearSearch" type="button" *ngIf="userCompany" matSuffix mat-icon-button
-                  aria-label="clear" (click)="userCompany='';loadService()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
-        </button>
 
-        <mat-accordion *ngIf="users; else usersError">
-          <mat-expansion-panel #elem class="users" [id]="user.email" [expanded]="this.isHighlighted(user)"
-                               *ngFor="let user of this.filterUsers(userName, userAge)">
-            <mat-expansion-panel-header>
-              <mat-panel-title matTooltip="email: {{user.email}}">{{user.name}}</mat-panel-title>
+        <!--<mat-accordion *ngIf="users; else usersError">-->
+          <!--<mat-expansion-panel #elem class="users" [id]="user.email" [expanded]="this.isHighlighted(user)"-->
+                               <!--*ngFor="let user of this.filterUsers(userName, userAge)">-->
+            <!--<mat-expansion-panel-header>-->
+              <!--<mat-panel-title matTooltip="email: {{user.email}}">{{user.name}}</mat-panel-title>-->
 
-            </mat-expansion-panel-header>
-            <mat-panel-description>Works for {{user.company}}</mat-panel-description>
-            <mat-panel-description>Age: {{user.age}} years old</mat-panel-description>
-          </mat-expansion-panel>
-        </mat-accordion>
+            <!--</mat-expansion-panel-header>-->
+            <!--<mat-panel-description>Works for {{user.company}}</mat-panel-description>-->
+            <!--<mat-panel-description>Age: {{user.age}} years old</mat-panel-description>-->
+            <!--<mat-panel-description>Age: {{user.age}} years old</mat-panel-description>-->
+            <!--<mat-panel-description>Age: {{user.age}} years old</mat-panel-description>-->
+          <!--</mat-expansion-panel>-->
+        <!--</mat-accordion>-->
+
+        <div class="cardlist" *ngIf="users; else usersError">
+          <mat-card #elem class="users" [id]="user.name"
+                    *ngFor="let user of this.filterUsers(searchName, searchAge)">
+            <!--<mat-icon class="incomplete" *ngIf="user.status === false">cancel_presentation</mat-icon>-->
+            <!--<mat-icon class="complete" *ngIf="user.status === true">check_circle</mat-icon>-->
+            <mat-card-header>
+              <mat-card-title [id]="user.name">{{user.name}}</mat-card-title>
+              <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>{{user.age}}</p>
+              <p>{{user.company}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
         <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
         <ng-template #usersError>
           <mat-error>
