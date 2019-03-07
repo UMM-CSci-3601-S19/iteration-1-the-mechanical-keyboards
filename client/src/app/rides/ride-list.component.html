@@ -1,45 +1,19 @@
-<div>
-  <button id="addNewRide" mat-raised-button (click)="openDialog()">Add New Ride</button>
-</div>
-
-
 <div layout-gt-sm="row">
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card>
       <mat-card-title id="ride-list-title">Rides</mat-card-title>
       <mat-divider></mat-divider>
       <mat-card-content>
-        <mat-form-field>
-          <input matInput id="rideName" #input type="text" placeholder="Filter by name"
-                 (input)="rideName = $event.target.value">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput id="rideAge" #input type="number" placeholder="Filter by age"
-                 (input)="rideAge = $event.target.value">
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput id="rideCompany" #input type="search" placeholder="Search for company"
-                 [(ngModel)]="rideCompany"/>
-          <button mat-button id="companyClearSearch" type="button" *ngIf="rideCompany" matSuffix mat-icon-button
-                  aria-label="clear" (click)="rideCompany='';loadService()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
-        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
-        </button>
-
         <mat-accordion *ngIf="rides; else ridesError">
-          <mat-expansion-panel #elem class="rides" [id]="ride.email" [expanded]="this.isHighlighted(ride)"
-                               *ngFor="let ride of this.filterRides(rideName, rideAge)">
+          <mat-expansion-panel #elem class="rides" [id]="ride._id" *ngFor="let ride of this.rides">
             <mat-expansion-panel-header>
-              <mat-panel-title matTooltip="email: {{ride.email}}">{{ride.name}}</mat-panel-title>
-
+              <mat-panel-title>Ride from {{ride.start_location}} to {{ride.end_location}}</mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-panel-description>Works for {{ride.company}}</mat-panel-description>
-            <mat-panel-description>Age: {{ride.age}} years old</mat-panel-description>
+            <mat-panel-description>Leaving on {{ride.departure_date}} at {{ride.departure_time}}</mat-panel-description>
+            <mat-panel-description>{{ride.seats_available}} seats available on this ride</mat-panel-description>
           </mat-expansion-panel>
         </mat-accordion>
-        <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+
         <ng-template #ridesError>
           <mat-error>
             There was a problem loading the rides. Possibly the server is down or perhaps there are network
@@ -49,6 +23,7 @@
             Please wait a bit and try again or start the server.
           </mat-error>
         </ng-template>
+
       </mat-card-content>
     </mat-card>
   </div>
