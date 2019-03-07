@@ -35,7 +35,14 @@ export class RideListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const newRide: Ride = {_id: '', name: '', age: -1, company: '', email: ''};
+    const newRide: Ride = {_id: '',
+      driver: '',
+      seats_available: -1,
+      start_location: '',
+      end_location: '',
+      departure_date: '',
+      departure_time: '',
+    };
     const dialogRef = this.dialog.open(AddRideComponent, {
       width: '500px',
       data: {ride: newRide}
@@ -57,7 +64,7 @@ export class RideListComponent implements OnInit {
       }
     });
   }
-
+/*
   public filterRides(searchName: string, searchAge: number): Ride[] {
 
     this.filteredRides = this.rides;

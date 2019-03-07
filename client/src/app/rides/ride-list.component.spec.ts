@@ -25,24 +25,30 @@ describe('Ride list', () => {
       getRides: () => Observable.of([
         {
           _id: 'chris_id',
-          name: 'Chris',
-          age: 25,
-          company: 'UMM',
-          email: 'chris@this.that'
+          driver: 'Chris',
+          seats_available: 3,
+          start_location: 'UMM',
+          end_location: 'Willie\'s',
+          departure_date: '3/6/2019',
+          departure_time: '10:00:00'
         },
         {
-          _id: 'pat_id',
-          name: 'Pat',
-          age: 37,
-          company: 'IBM',
-          email: 'pat@something.com'
+          _id: 'dennis_id',
+          driver: 'Dennis',
+          seats_available: 1,
+          start_location: 'Caribou Coffee',
+          end_location: 'Minneapolis, MN',
+          departure_date: '8/15/2018',
+          departure_time: '11:30:00'
         },
         {
-          _id: 'jamie_id',
-          name: 'Jamie',
-          age: 37,
-          company: 'Frogs, Inc.',
-          email: 'jamie@frogs.com'
+          _id: 'agatha_id',
+          driver: 'Agatha',
+          seats_available: 6,
+          start_location: 'UMM',
+          end_location: 'Fergus Falls, MN',
+          departure_date: '3/30/2019',
+          departure_time: '16:30:00'
         }
       ])
     };

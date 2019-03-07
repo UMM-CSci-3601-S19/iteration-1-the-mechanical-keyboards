@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {Ride} from './ride';
 import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
-import {NameValidator} from "./name.validator";
 
 @Component({
   selector: 'add-ride.component',
