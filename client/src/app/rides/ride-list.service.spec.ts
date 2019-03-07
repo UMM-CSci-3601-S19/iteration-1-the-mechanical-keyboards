@@ -11,29 +11,32 @@ describe('Ride list service: ', () => {
     {
       _id: 'chris_id',
       driver: 'Chris',
-      seats_available: 3,
-      start_location: 'UMM',
-      end_location: 'Willie\'s',
-      departure_date: '3/6/2019',
-      departure_time: '10:00:00'
+      notes: 'These are Chris\'s ride notes',
+      seatsAvailable: 3,
+      origin: 'UMM',
+      destination: 'Willie\'s',
+      departureDate: '3/6/2019',
+      departureTime: '10:00:00'
     },
     {
       _id: 'dennis_id',
       driver: 'Dennis',
-      seats_available: 1,
-      start_location: 'Caribou Coffee',
-      end_location: 'Minneapolis, MN',
-      departure_date: '8/15/2018',
-      departure_time: '11:30:00'
+      notes: 'These are Dennis\'s ride notes',
+      seatsAvailable: 3,
+      origin: 'Caribou Coffee',
+      destination: 'Minneapolis, MN',
+      departureDate: '8/15/2018',
+      departureTime: '11:30:00'
     },
     {
       _id: 'agatha_id',
       driver: 'Agatha',
-      seats_available: 6,
-      start_location: 'UMM',
-      end_location: 'Fergus Falls, MN',
-      departure_date: '3/30/2019',
-      departure_time: '16:30:00'
+      notes: 'These are Agatha\'s ride notes',
+      seatsAvailable: 6,
+      origin: 'UMM',
+      destination: 'Fergus Falls, MN',
+      departureDate: '3/30/2019',
+      departureTime: '16:30:00'
     }
   ];
 
