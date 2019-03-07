@@ -20,45 +20,18 @@ export class RidePage {
     return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
   }
 
+  getUniqueRide(email: string) {
+    const user = element(by.id(email)).getText();
+    this.highlightElement(by.id(email));
+
+    return user;
+  }
+
   getRideTitle() {
     const title = element(by.id('ride-list-title')).getText();
     this.highlightElement(by.id('ride-list-title'));
 
     return title;
-  }
-
-  typeADriverName(name: string) {
-    const input = element(by.id('driverName'));
-    input.click();
-    input.sendKeys(name);
-  }
-
-  selectUpKey() {
-    browser.actions().sendKeys(Key.ARROW_UP).perform();
-  }
-
-  backspace() {
-    browser.actions().sendKeys(Key.BACK_SPACE).perform();
-  }
-
-  getSeatNumber(company: string) {
-    const input = element(by.id('userSeatsAvailable'));
-    input.click();
-    input.sendKeys(company);
-    this.click('submit');
-  }
-
-  getUserByAge() {
-    const input = element(by.id('userName'));
-    input.click();
-    input.sendKeys(Key.TAB);
-  }
-
-  getUniqueUser(email: string) {
-    const user = element(by.id(email)).getText();
-    this.highlightElement(by.id(email));
-
-    return user;
   }
 
   getUsers() {
