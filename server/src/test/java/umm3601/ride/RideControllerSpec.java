@@ -4,12 +4,18 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+import org.bson.*;
 import org.bson.types.ObjectId;
 import org.junit.Before;
+import org.junit.Test;
+import umm3601.DatabaseHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.junit.Assert.*;
 
 public class RideControllerSpec {
   private RideController rideController;
@@ -60,5 +66,25 @@ public class RideControllerSpec {
     rideDocuments.insertOne(Document.parse(ellisRide.toJson()));
 
     rideController = new RideController(db);
+  }
+
+  private static String getDriver(BsonValue val) {
+    BsonDocument ride = val.asDocument();
+    return ((BsonString) ride.get("driver")).getValue();
+  }
+
+  @Test
+  public void getAllRides() {
+    String jsonResult = rideController.getRides();
+    BsonArray rides = DatabaseHelper.parseJsonArray(jsonResult);
+
+    assertEquals("Should be 4 rides", 4, rides.size());
+    List<String> drivers = rides
+      .stream()
+      .map(RideControllerSpec::getDriver)
+      .sorted()
+      .collect(Collectors.toList());
+    List<String> expectedDrivers = Arrays.asList("Avery", "Colt", "Ellis", "Michael");
+    assertEquals("Drivers should match", expectedDrivers, drivers);
   }
 }
