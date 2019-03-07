@@ -4,6 +4,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
+import umm3601.ride.RideController;
+import umm3601.ride.RideRequestHandler;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
 
@@ -11,18 +13,43 @@ import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public class Server {
-  private static final String userDatabaseName = "dev";
+  private static final String databaseName = "dev";
   private static final int serverPort = 4567;
 
   public static void main(String[] args) {
 
+    configureSpark();
+
+    // DATABASE
     MongoClient mongoClient = new MongoClient();
-    MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
+    MongoDatabase database = mongoClient.getDatabase(databaseName);
 
-    UserController userController = new UserController(userDatabase);
+    // CONTROLLERS & REQUEST HANDLERS
+    UserController userController = new UserController(database);
     UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
+    RideController rideController = new RideController(database);
+    RideRequestHandler rideRequestHandler = new RideRequestHandler(rideController);
 
-    //Configure Spark
+    // Redirects for the home page
+    redirect.get("", "/");
+    redirect.get("/", "http://localhost:9000");
+
+    // USER ENDPOINTS
+    get("api/users", userRequestHandler::getUsers);
+    get("api/users/:id", userRequestHandler::getUserJSON);
+    post("api/users/new", userRequestHandler::addNewUser);
+
+    // RIDE ENDPOINTS
+    get("api/rides", rideRequestHandler::getRides);
+  }
+
+  // Enable GZIP for all responses
+  private static void addGzipHeader(Request request, Response response) {
+    response.header("Content-Encoding", "gzip");
+  }
+
+  private static void configureSpark() {
+
     port(serverPort);
     enableDebugScreen();
 
@@ -46,30 +73,6 @@ public class Server {
 
     before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
 
-
-    // Simple example route
-    get("/hello", (req, res) -> "Hello World");
-
-    // Redirects for the "home" page
-    redirect.get("", "/");
-
-    redirect.get("/", "http://localhost:9000");
-
-    /// User Endpoints ///////////////////////////
-    /////////////////////////////////////////////
-
-    //List users, filtered using query parameters
-
-    get("api/users", userRequestHandler::getUsers);
-    get("api/users/:id", userRequestHandler::getUserJSON);
-    post("api/users/new", userRequestHandler::addNewUser);
-
-    // An example of throwing an unhandled exception so you can see how the
-    // Java Spark debugger displays errors like this.
-    get("api/error", (req, res) -> {
-      throw new RuntimeException("A demonstration error");
-    });
-
     // Called after each request to insert the GZIP header into the response.
     // This causes the response to be compressed _if_ the client specified
     // in their request that they can accept compressed responses.
@@ -83,10 +86,5 @@ public class Server {
       res.status(404);
       return "Sorry, we couldn't find that!";
     });
-  }
-
-  // Enable GZIP for all responses
-  private static void addGzipHeader(Request request, Response response) {
-    response.header("Content-Encoding", "gzip");
   }
 }
