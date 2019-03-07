@@ -15,7 +15,7 @@ export class RideListService {
   constructor(private http: HttpClient) {
   }
 
-  getRides(rideCompany?: string): Observable<Ride[]> {
+  getRides(): Observable<Ride[]> {
     return this.http.get<Ride[]>(this.rideUrl);
   }
 }
