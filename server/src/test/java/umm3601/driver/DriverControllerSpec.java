@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 /**
  * JUnit tests for the DriverController.
  * <p>
- * Created by mcphee on 22/2/17.
+ * Created by Michael on 22/2/17.
  */
 public class DriverControllerSpec {
   private DriverController driverController;
@@ -36,7 +36,7 @@ public class DriverControllerSpec {
     List<Document> testDrivers = new ArrayList<>();
     testDrivers.add(Document.parse("{\n" +
       "                    driver: \"Nic McPhee\",\n" +
-      "                    seats_avail: 3,\n" +
+      "                    seats_available: 3,\n" +
       "                    start_location: \"Gay Hall\",\n" +
       "                    end_location: \"Willie\'s\"\n" +
       "                    departure_date: \"2019-03-21\",\n" +
@@ -44,7 +44,7 @@ public class DriverControllerSpec {
       "                }"));
     testDrivers.add(Document.parse("{\n" +
       "                    driver: \"Jon Rivers\",\n" +
-      "                    seats_avail: 1,\n" +
+      "                    seats_available: 1,\n" +
       "                    start_location: \"The Met Lounge\",\n" +
       "                    end_location: \"111 East 4th St.\"\n" +
       "                    departure_date: \"2019-05-25\",\n" +
@@ -52,7 +52,7 @@ public class DriverControllerSpec {
       "                }"));
     testDrivers.add(Document.parse("{\n" +
       "                    driver: \"Ruffus Clang\",\n" +
-      "                    seats_avail: 2,\n" +
+      "                    seats_available: 2,\n" +
       "                    start_location: \"222 West 5th St\",\n" +
       "                    end_location: \"Casey\'s\"\n" +
       "                    departure_date: \"2020-05-27\",\n" +
@@ -62,7 +62,7 @@ public class DriverControllerSpec {
     jonsId = new ObjectId();
     BasicDBObject jon = new BasicDBObject("_id", jonsId);
     jon = jon.append("driver", "Jon")
-      .append("seats_avail", 3)
+      .append("seats_available", 3)
       .append("start_location", "Willie\'s")
       .append("end_location", "Old No 1")
       .append("departure_date", "2019-05-05")
@@ -116,7 +116,7 @@ public class DriverControllerSpec {
   @Test
   public void getDriversWhoHave3Seats() {
     Map<String, String[]> argMap = new HashMap<>();
-    argMap.put("seats_avail", new String[]{"3"});
+    argMap.put("seats_available", new String[]{"3"});
     String jsonResult = driverController.getDrivers(argMap);
     BsonArray docs = parseJsonArray(jsonResult);
 
