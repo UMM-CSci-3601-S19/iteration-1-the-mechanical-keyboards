@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {RideListService} from './ride-list.service';
 import {Ride} from './ride';
 import {Observable} from 'rxjs/Observable';
-import {MatDialog} from '@angular/material';
 
 @Component({
   selector: 'ride-list-component',
@@ -11,50 +10,12 @@ import {MatDialog} from '@angular/material';
 })
 
 export class RideListComponent implements OnInit {
-  // These are public so that tests can reference them (.spec.ts)
+  // public so that tests can reference them (.spec.ts)
   public rides: Ride[];
-  public filteredRides: Ride[];
-
-  // These are the target values used in searching.
-  // We should rename them to make that clearer.
-  public rideName: string;
-  public rideAge: number;
-  public rideCompany: string;
-
-  // The ID of the
-  private highlightedID: string = '';
 
   // Inject the RideListService into this component.
-  constructor(public rideListService: RideListService, public dialog: MatDialog) {
+  constructor(public rideListService: RideListService) {
 
-  }
-
-  isHighlighted(ride: Ride): boolean {
-    return ride._id['$oid'] === this.highlightedID;
-  }
-
-/*
-  public filterRides(searchName: string, searchAge: number): Ride[] {
-
-    this.filteredRides = this.rides;
-
-    // Filter by name
-    if (searchName != null) {
-      searchName = searchName.toLocaleLowerCase();
-
-      this.filteredRides = this.filteredRides.filter(ride => {
-        return !searchName || ride.name.toLowerCase().indexOf(searchName) !== -1;
-      });
-    }
-
-    // Filter by age
-    if (searchAge != null) {
-      this.filteredRides = this.filteredRides.filter(ride => {
-        return !searchAge || ride.age == searchAge;
-      });
-    }
-
-    return this.filteredRides;
   }
 
   /**
@@ -80,10 +41,9 @@ export class RideListComponent implements OnInit {
   }
 
   loadService(): void {
-    this.rideListService.getRides(this.rideCompany).subscribe(
+    this.rideListService.getRides().subscribe(
       rides => {
         this.rides = rides;
-        this.filteredRides = this.rides;
       },
       err => {
         console.log(err);
