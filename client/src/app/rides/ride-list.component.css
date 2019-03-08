@@ -26,10 +26,11 @@
   flex-basis: 100%;
 }
 
-.add-ride {
+.add-ride-button {
   font-size: 4rem;
   float: inherit;
   float: right;
+
 
 }
 
