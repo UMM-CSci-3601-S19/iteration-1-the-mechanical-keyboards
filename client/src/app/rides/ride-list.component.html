@@ -9,8 +9,10 @@
             <mat-expansion-panel-header>
               <mat-panel-title>Ride from {{ride.origin}} to {{ride.destination}}</mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-panel-description>Leaving on {{ride.departure_date}} at {{ride.departure_time}}</mat-panel-description>
+            <mat-panel-description>Leaving on {{ride.departureDate}} at {{ride.departureTime}}</mat-panel-description>
             <mat-panel-description>{{ride.seatsAvailable}} seats available on this ride</mat-panel-description>
+            <mat-panel-description>Driver: {{ride.driver}}</mat-panel-description>
+            <mat-panel-description>Notes: {{ride.notes}}</mat-panel-description>
           </mat-expansion-panel>
         </mat-accordion>
 
