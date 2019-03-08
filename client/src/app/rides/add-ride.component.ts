@@ -55,14 +55,14 @@ export class AddRideComponent implements OnInit {
         _id: '',
         driver: '',
         notes: '',
-        seatsAvailable: '',
+        seatsAvailable: -1,
         origin: '',
         destination: '',
         departureDate: '',
         departureTime: ''
       };
 
-      data: {ride: newRide}
+      //data: {ride: newRide}
     }
 
   }
