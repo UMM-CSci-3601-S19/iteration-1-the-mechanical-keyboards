@@ -1,6 +1,40 @@
-<!-- example from
-https://github.com/AngularTemplates/angular-forms-and-validations/blob/master/src/app/form-component/form.component.html
-is potentially helpful and contributed to the shaping of this example -->
-<div class="add-ride">
-</div>
+<div layout-gt-sm="row">
+  <div flex-gt-sm="80" flex-offset-gt-sm="10">
+    <mat-card>
+      <mat-card-title id="ride-add-title">Add a Ride</mat-card-title>
+      <mat-card-content>
 
+        <!–– [(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes. ––>
+        <!–– formControl[field] = "field" as well.  ––>
+
+        <input matInput #input id="driverField" placeholder="Driver"
+               required>
+        <br />
+
+        <input matInput #input id="notesField" placeholder="Notes"
+               required>
+        <br />
+        <input matInput #input id="seatsAvailableField" placeholder="Seats Available"
+               required>
+        <br />
+
+        <input matInput #input id="originField" placeholder="Origin"
+               required>
+        <br />
+        <input matInput #input id="destinationField" placeholder="Destination"
+               required>
+        <br />
+        <input matInput #input id="departureDateField" placeholder="Departure Date"
+               required>
+        <br />
+        <input matInput #input id="departureTimeField" placeholder="Departure Time"
+               required>
+
+
+      </mat-card-content>
+
+
+
+    </mat-card>
+  </div>
+</div>
