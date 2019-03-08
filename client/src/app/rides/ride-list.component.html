@@ -2,7 +2,8 @@
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card>
       <mat-card-title id="ride-list-title">Rides</mat-card-title>
-      <mat-divider></mat-divider>
+      <mat-icon class="add-ride">add_circle_outline</mat-icon>
+      <mat-divider ></mat-divider>
       <mat-card-content>
         <mat-accordion *ngIf="rides; else ridesError">
           <mat-expansion-panel #elem class="rides" [id]="ride._id" *ngFor="let ride of this.rides">
