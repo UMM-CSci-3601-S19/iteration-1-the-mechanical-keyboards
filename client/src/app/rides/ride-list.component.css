@@ -30,8 +30,10 @@
   font-size: 4rem;
   float: inherit;
   float: right;
+}
 
-
+.add-ride-button:hover{
+  color:grey; /* We can talk about what color this should be*/
 }
 
 @media screen and (min-width: 960px) {
