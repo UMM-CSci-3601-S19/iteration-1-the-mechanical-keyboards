@@ -38,8 +38,8 @@ public class RideRequestHandler {
     String departureTime = newRide.getString("departureTime");
     String departureDate = newRide.getString("departureDate");
 
-    System.err.println("Adding new ride [driver=" + driver + ", notes=" + notes + " seatsAvailable=" + seatsAvailable
-      + " origin=" + origin + " destination=" + destination + " departureTime=" + departureTime + " departureDate="
+    System.err.println("Adding new ride [driver=" + driver + ", notes=" + notes + ", seatsAvailable=" + seatsAvailable
+      + ", origin=" + origin + ", destination=" + destination + ", departureTime=" + departureTime + ", departureDate="
       + departureDate + ']');
     return rideController.addNewRide(driver, notes, seatsAvailable, origin, destination, departureTime, departureDate);
   }
