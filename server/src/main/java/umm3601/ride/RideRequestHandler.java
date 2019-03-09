@@ -24,7 +24,7 @@ public class RideRequestHandler {
     res.type("application/json");
     return rideController.getRides();
   }
-  
+
   /**
    * Method called from Server when the 'api/rides/new' endpoint is received.
    * Gets specified rides info from request and calls addNewRide helper method
