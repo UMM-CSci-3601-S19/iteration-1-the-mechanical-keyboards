@@ -1,44 +1,44 @@
 <div layout-gt-sm="row">
   <div flex-gt-sm="80" flex-offset-gt-sm="10">
     <mat-card class="addARide">
-      <mat-card-title id="ride-add-title">Add a Ride</mat-card-title>
-      <mat-card-content>
+      <mat-card-title class="rideAddTitle">Add a Ride</mat-card-title>
+      <mat-card-content class="addARideContent">
 
         <!–– [(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes. ––>
         <!–– formControl[field] = "field" as well.  ––>
 
-        <input matInput #input id="driverField" placeholder="Driver"
+        <input class="inputRideInfo" matInput #input id="driverField" placeholder="Driver"
                required>
         <br />
 
-        <input matInput #input id="notesField" placeholder="Notes"
+        <input class="inputRideInfo" matInput #input id="notesField" placeholder="Notes"
                required>
         <br />
-        <input matInput #input id="seatsAvailableField" placeholder="Seats Available"
+        <input class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
                required>
         <br />
 
-        <input matInput #input id="originField" placeholder="Origin"
+        <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
                required>
         <br />
-        <input matInput #input id="destinationField" placeholder="Destination"
+        <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
                required>
         <br />
-        <input matInput #input id="departureDateField" placeholder="Departure Date"
+        <input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"
                required>
         <br />
-        <input matInput #input id="departureTimeField" placeholder="Departure Time"
+        <input class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
                required>
 
       </mat-card-content>
 
       <mat-dialog-actions layout="row">
         <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
-        <button mat-raised-button id="confirmAddRideButton"  type="button" color="primary"
+        <button class="addRideButton" mat-raised-button id="confirmAddRideButton"  type="button" color="primary"
                 >Add Ride
         </button>
         <!-- [mat-dialog-close]="null" causes null to be returned when the dialog is closed. -->
-        <button mat-raised-button id="exitWithoutAddingButton" routerLink="/rides" color="warn" type="button">Cancel</button>
+        <button class="cancelRideButton" mat-raised-button id="exitWithoutAddingButton" routerLink="/rides" color="warn" type="button">Cancel</button>
       </mat-dialog-actions>
 
 
