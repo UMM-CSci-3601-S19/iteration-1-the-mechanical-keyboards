@@ -1,9 +1,14 @@
 <div layout-gt-sm="row">
-  <div flex-gt-sm="80" flex-offset-gt-sm="10">
+  <div flex-gt-sm="50" flex-offset-gt-sm="25" layout-align-gt-sm="right">
     <mat-card>
       <mat-card-title id="ride-list-title">Rides</mat-card-title>
-      <mat-icon class="add-ride-button"
-      role="button" style="cursor:pointer;" routerLink="/addride" >add_circle_outline </mat-icon>
+      <mat-card-subtitle>
+        <button mat-raised-button id="add-ride-button" routerLink="/addride" color="primary" type="button" role="button">
+          <mat-icon>add_circle_outline</mat-icon>
+          Create a Ride
+        </button>
+      </mat-card-subtitle>
+
       <mat-divider ></mat-divider>
       <mat-card-content>
 
