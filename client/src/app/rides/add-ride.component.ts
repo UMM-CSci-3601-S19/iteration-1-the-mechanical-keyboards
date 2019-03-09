@@ -6,6 +6,7 @@ import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 @Component({
   selector: 'add-ride.component',
   templateUrl: 'add-ride.component.html',
+  styleUrls: ['./add-ride.component.css'],
 })
 export class AddRideComponent implements OnInit {
 

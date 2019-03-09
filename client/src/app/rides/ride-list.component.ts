@@ -28,7 +28,6 @@ export class RideListComponent implements OnInit {
     //
     // Subscribe waits until the data is fully downloaded, then
     // performs an action on it (the first lambda)
-
     const rides: Observable<Ride[]> = this.rideListService.getRides();
     rides.subscribe(
       rides => {
