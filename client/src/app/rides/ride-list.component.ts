@@ -13,10 +13,30 @@ export class RideListComponent implements OnInit {
   // public so that tests can reference them (.spec.ts)
   public rides: Ride[];
 
+  private highlightedID: string = '';
+
   // Inject the RideListService into this component.
   constructor(public rideListService: RideListService) {
 
   }
+
+  addRide(): void {
+    const newRide: Ride = {_id: '', driver: '', notes: '', seatsAvailable: 1, origin: '', destination: '', departureDate: '', departureTime: ''};
+    console.log(newRide);
+    if (newRide != null) {
+      this.rideListService.addNewRide(newRide).subscribe(
+        result => {
+          this.highlightedID = result;
+          this.refreshRides();
+        },
+        err => {
+          // This should probably be turned into some sort of meaningful response.
+          console.log('There was an error adding the ride.');
+          console.log('The newRide or dialogResult was ' + newRide);
+          console.log('The error was ' + JSON.stringify(err));
+        });
+    }
+  };
 
   /**
    * Starts an asynchronous operation to update the rides list
