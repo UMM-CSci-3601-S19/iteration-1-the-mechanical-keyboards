@@ -28,6 +28,7 @@
 
 .ride-title {
   display: flex;
+  background-image: linear-gradient(to right bottom, #29b6f6,#73e8ff);
   background-color: #29b6f6;
   color: #fff;
   border-top-left-radius: 2px;
@@ -54,7 +55,7 @@
   font-weight: bold;
 }
 
-.origin, .destination {
+.origin, .destination, .notes {
   display: inline-block;
   margin: 2px 2px 2px 0;
   padding: 6px 6px 6px 0;
@@ -64,7 +65,7 @@
   font-size: 0.8rem;
 }
 
-.origin small, .destination small{
+.origin small, .destination small, .notes small {
   display: block;
   color: #333;
   font-weight: bold;
