@@ -41,6 +41,7 @@ public class Server {
 
     // RIDE ENDPOINTS
     get("api/rides", rideRequestHandler::getRides);
+    post("api/rides/new", rideRequestHandler::addNewRide);
   }
 
   // Enable GZIP for all responses
