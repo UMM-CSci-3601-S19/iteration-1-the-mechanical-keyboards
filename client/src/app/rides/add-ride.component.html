@@ -8,34 +8,34 @@
         <!–– formControl[field] = "field" as well.  ––>
 
         <input class="inputRideInfo" matInput #input id="driverField" placeholder="Driver"
-               required>
+               required [(ngModel)]="rideDriver">
         <br />
 
         <input class="inputRideInfo" matInput #input id="notesField" placeholder="Notes"
-               required>
+               required [(ngModel)]="rideNotes">
         <br />
         <input class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
-               required>
+               required [(ngModel)]="rideSeats">
         <br />
 
         <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
-               required>
+               required [(ngModel)]="rideOrigin">
         <br />
         <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
-               required>
+               required [(ngModel)]="rideDestination">
         <br />
         <input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"
-               required>
+               required [(ngModel)]="rideDepartureDate">
         <br />
         <input class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
-               required>
+               required [(ngModel)]="rideDepartureTime">
 
       </mat-card-content>
 
       <mat-dialog-actions layout="row">
         <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
         <button class="addRideButton" mat-raised-button id="confirmAddRideButton"  type="button" color="primary"
-                >Add Ride
+                (click)="addRide()">Add Ride
         </button>
         <!-- [mat-dialog-close]="null" causes null to be returned when the dialog is closed. -->
         <button class="cancelRideButton" mat-raised-button id="exitWithoutAddingButton" routerLink="/rides" color="warn" type="button">Cancel</button>
