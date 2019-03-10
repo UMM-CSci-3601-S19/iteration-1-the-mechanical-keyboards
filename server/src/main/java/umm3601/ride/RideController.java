@@ -8,8 +8,11 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import umm3601.DatabaseHelper;
 
+import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static com.mongodb.client.model.Filters.eq;
 
 public class RideController {
 
@@ -22,6 +25,29 @@ public class RideController {
    */
   public RideController(MongoDatabase database) {
     rideCollection = database.getCollection("rides");
+  }
+
+  /**
+   * Helper method that gets a single ride specified by the `id`
+   * parameter in the request.
+   *
+   * @param id the Mongo ID of the desired ride
+   * @return the desired ride as a JSON object if the ride with that ID is found,
+   * and `null` if no ride with that ID is found
+   */
+  public String getRide(String id) {
+    FindIterable<Document> jsonRides
+      = rideCollection
+      .find(eq("_id", new ObjectId(id)));
+
+    Iterator<Document> iterator = jsonRides.iterator();
+    if (iterator.hasNext()) {
+      Document ride = iterator.next();
+      return ride.toJson();
+    } else {
+      // We didn't find the desired ride
+      return null;
+    }
   }
 
   /**
