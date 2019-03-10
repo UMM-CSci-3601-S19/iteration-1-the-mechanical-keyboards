@@ -71,7 +71,7 @@ public class RideController {
     Document newRide = new Document();
     newRide.append("driver", driver);
     newRide.append("notes", notes);
-    newRide.append("company", seatsAvailable);
+    newRide.append("seatsAvailable", seatsAvailable);
     newRide.append("origin", origin);
     newRide.append("destination", destination);
     newRide.append("departureTime", departureTime);
