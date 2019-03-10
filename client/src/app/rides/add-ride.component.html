@@ -35,7 +35,7 @@
       <mat-dialog-actions layout="row">
         <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
         <button class="addRideButton" mat-raised-button id="confirmAddRideButton"  type="button" color="primary"
-                (click)="addRide()">Add Ride
+                (click)="addRide()" routerLink="/rides">Add Ride
         </button>
         <!-- [mat-dialog-close]="null" causes null to be returned when the dialog is closed. -->
         <button class="cancelRideButton" mat-raised-button id="exitWithoutAddingButton" routerLink="/rides" color="warn" type="button">Cancel</button>
