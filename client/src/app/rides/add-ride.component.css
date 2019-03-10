@@ -3,7 +3,6 @@
   border-top-right-radius: 2px;
   border-radius: 12.5px;
   border: 2px solid black;
-  z-index: -1;
 }
 
 .addARideContent{
@@ -14,7 +13,6 @@
   background: linear-gradient(to right bottom, #29b6f6,#73e8ff);
   border-radius: 10px 10px 2px 2px;
   border: hidden;
-  z-index: 1;
 }
 
 .addRideButton{
