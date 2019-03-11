@@ -6,8 +6,7 @@
       <mat-card-content>
 
         <div class="cardlist" *ngIf="rides; else ridesError">
-          <mat-card #elem class="rides" [id]="ride._id"
-                    *ngFor="let ride of this.rides">
+          <mat-card #elem class="rides" [id]="ride._id.$oid" *ngFor="let ride of this.rides">
             <mat-card-header class="ride-title">
               <mat-card-title>
                 <div class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
