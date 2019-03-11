@@ -1,7 +1,8 @@
 <div layout-gt-sm="row">
-  <div flex-gt-sm="50" flex-offset-gt-sm="25" layout-align-gt-sm="right">
+  <div flex-gt-sm="50" flex-offset-gt-sm="25">
     <mat-card>
-      <mat-card-title id="ride-list-title">Rides</mat-card-title>
+      <mat-card-title id="ride-list-title">Upcoming Rides</mat-card-title>
+      <mat-divider></mat-divider>
       <mat-card-subtitle>
         <button mat-raised-button id="add-ride-button" routerLink="/addride" color="primary" type="button" role="button">
           <mat-icon>add_circle_outline</mat-icon>
@@ -10,21 +11,36 @@
       </mat-card-subtitle>
 
       <mat-divider ></mat-divider>
+
       <mat-card-content>
 
         <div class="cardlist" *ngIf="rides; else ridesError">
           <mat-card #elem class="rides" [id]="ride._id"
                     *ngFor="let ride of this.rides">
-            <!--<mat-icon class="incomplete" *ngIf="user.status === false">cancel_presentation</mat-icon>-->
-            <!--<mat-icon class="complete" *ngIf="user.status === true">check_circle</mat-icon>-->
-            <mat-card-header id="card-header">
-              <mat-card-title class="card-header" [id]="ride.origin">Ride from {{ride.origin}} to {{ride.destination}}</mat-card-title>
-              <mat-card-subtitle>Leaving on {{ride.departureDate}} at {{ride.departureTime}}</mat-card-subtitle>
+            <mat-card-header class="ride-title">
+              <mat-card-title [id]="ride.origin">
+                <div class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
+                <div class="seats-left">
+                  <small>{{ride.seatsAvailable}} SEATS LEFT</small>
+                </div>
+              </mat-card-title>
             </mat-card-header>
+
             <mat-card-content>
-              <p>{{ride.seatsAvailable}} seats available on this ride</p>
-              <p>Driver: {{ride.driver}}</p>
-              <p>Notes: {{ride.notes}}</p>
+              <div class="origin">
+                <small>FROM</small>
+                {{ride.origin}}
+              </div>
+              <div class="destination">
+                <small>TO</small>
+                {{ride.destination}}
+              </div>
+              <mat-divider></mat-divider>
+              <p><strong>{{ride.driver}} is offering this ride</strong></p>
+              <div class="notes">
+                <small>NOTES</small>
+                {{ride.notes}}
+              </div>
             </mat-card-content>
           </mat-card>
         </div>

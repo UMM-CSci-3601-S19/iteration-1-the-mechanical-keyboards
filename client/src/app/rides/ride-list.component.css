@@ -26,6 +26,50 @@
   flex-basis: 100%;
 }
 
+.ride-title {
+  display: flex;
+  background-image: linear-gradient(to right bottom, #29b6f6,#73e8ff);
+  background-color: #29b6f6;
+  color: #fff;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.ride-title mat-card-title {
+  width: 100%;
+}
+
+.departure-time {
+  padding: 4px 0;
+}
+
+.seats-left {
+  display: inline-block;
+  padding: 4px 6px;
+  margin-top: 4px;
+  border-radius: 2px;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+}
+
+.origin, .destination, .notes {
+  display: inline-block;
+  margin: 2px 2px 2px 0;
+  padding: 6px 6px 6px 0;
+  /*border-radius: 3px;*/
+  /*box-shadow: #cdcdcd 0px 1px 2px;*/
+  /*background-color: #b3e5fc;*/
+  font-size: 0.8rem;
+}
+
+.origin small, .destination small, .notes small {
+  display: block;
+  color: #333;
+  font-weight: bold;
+  padding-bottom: 4px;
+}
+
 .add-ride-button {
   font-size: 4rem;
   float: inherit;
