@@ -27,13 +27,13 @@
   border: 1px solid black;
 }
 
-table {
-  border-collapse: collapse;
-}
+/*table {*/
+  /*border-collapse: collapse;*/
+/*}*/
 
-table, input {
-  border: 1px solid black;
-}
+/*table, input {*/
+  /*border: 1px solid black;*/
+/*}*/
 
 .inputRideInfo{
   border-radius: 2px;

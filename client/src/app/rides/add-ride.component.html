@@ -7,28 +7,40 @@
         <!–– [(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes. ––>
         <!–– formControl[field] = "field" as well.  ––>
 
-        <input class="inputRideInfo" matInput #input id="driverField" placeholder="Driver"
-               required [(ngModel)]="rideDriver">
-        <br />
+        <mat-form-field>
+          <input class="inputRideInfo" matInput #input id="driverField" placeholder="Driver" required
+                 [(ngModel)]="rideDriver">
+        </mat-form-field>
 
+        <mat-form-field>
         <input class="inputRideInfo" matInput #input id="notesField" placeholder="Notes"
                required [(ngModel)]="rideNotes">
-        <br />
+        </mat-form-field>
+
+        <mat-form-field>
         <input class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
                required [(ngModel)]="rideSeats">
-        <br />
+        </mat-form-field>
 
+        <mat-form-field>
         <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
                required [(ngModel)]="rideOrigin">
-        <br />
+        </mat-form-field>
+
+        <mat-form-field>
         <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
                required [(ngModel)]="rideDestination">
-        <br />
+        </mat-form-field>
+
+        <mat-form-field>
         <input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"
                required [(ngModel)]="rideDepartureDate">
-        <br />
+        </mat-form-field>
+
+        <mat-form-field>
         <input class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
                required [(ngModel)]="rideDepartureTime">
+        </mat-form-field>
 
       </mat-card-content>
 
