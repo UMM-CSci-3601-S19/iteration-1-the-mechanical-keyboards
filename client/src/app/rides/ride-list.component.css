@@ -1,35 +1,14 @@
-#title input {
-  width: 16%;
-  min-width: 100px;
-}
-
-#list-title {
-  padding-right: 14px;
-}
-
-.mat-card-subtitle {
-  padding-left: 8px !important;
-}
-
-.mat-card-title {
-  padding-left: 8px !important;
-}
-
-.cardlist  {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
+.mat-card-title, .mat-card-subtitle {
+  padding-left: 8px;
 }
 
 .rides {
-  flex-basis: 100%;
+  margin-bottom: 15px;
 }
 
 .ride-title {
   display: flex;
-  background-image: linear-gradient(to right bottom, #29b6f6,#73e8ff);
-  background-color: #29b6f6;
+  background: #29b6f6 linear-gradient(to right bottom, #29b6f6,#73e8ff);
   color: #fff;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
@@ -70,9 +49,6 @@
   padding-bottom: 4px;
 }
 
-@media screen and (min-width: 960px) {
-  .users {
-    flex: 0 1 calc(50% - 32px); /*Suguru Inatomi @ https://blog.angularindepth.com/angular-flex-layout-flexbox-and-grid-layout-for-angular-component-6e7c24457b63*/
-  }
+#ride-list-title {
+  text-align: center;
 }
-
