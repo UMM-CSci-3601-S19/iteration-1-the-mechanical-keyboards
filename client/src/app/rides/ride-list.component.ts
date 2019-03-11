@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'ride-list-component',
   templateUrl: 'ride-list.component.html',
-  styleUrls: ['./ride-list.component.css'],
+  styleUrls: ['./ride-list.component.scss'],
   providers: []
 })
 

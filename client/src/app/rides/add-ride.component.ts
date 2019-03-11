@@ -9,10 +9,13 @@ import {Observable} from "rxjs/Observable";
 @Component({
   selector: 'add-ride.component',
   templateUrl: 'add-ride.component.html',
-  styleUrls: ['./add-ride.component.css'],
+  styleUrls: ['./add-ride.component.scss'],
   providers: [ RideListComponent ]
 })
 export class AddRideComponent implements OnInit {
+
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()));
 
   public rides: Ride[];
 

@@ -1,3 +1,5 @@
+@import "../../theme";
+
 #title input {
   width: 16%;
   min-width: 100px;
@@ -28,8 +30,8 @@
 
 .ride-title {
   display: flex;
-  background-image: linear-gradient(to right bottom, #29b6f6,#73e8ff);
-  background-color: #29b6f6;
+  background-image: linear-gradient(to right bottom, mat-color($primary),mat-color($primary, lighter));
+  background-color: mat-color($primary);
   color: #fff;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
