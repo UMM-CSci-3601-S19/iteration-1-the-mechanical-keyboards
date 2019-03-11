@@ -25,14 +25,17 @@
                 <small>TO</small>
                 {{ride.destination}}
               </div>
-              <mat-divider></mat-divider>
+
+              <mat-divider [inset]="true"></mat-divider>
+
               <div class="driver">
-                <strong>{{ride.driver}} is offering this ride</strong>
+                <p><strong>{{ride.driver}} is offering this ride</strong></p>
               </div>
               <div class="notes">
                 <small>NOTES</small>
                 {{ride.notes}}
               </div>
+
             </mat-card-content>
           </mat-card>
         </div>
