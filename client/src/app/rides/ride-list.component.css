@@ -40,15 +40,13 @@
 }
 
 .departure-time {
-  display: inline-block;
-  padding: 4px;
+  padding: 4px 0;
 }
 
 .seats-left {
   display: inline-block;
-  float: right;
   padding: 4px 6px;
-  margin-right: 8px;
+  margin-top: 4px;
   border-radius: 2px;
   background-color: #fff;
   color: #000;
