@@ -22,6 +22,8 @@ import {AddRideComponent} from './rides/add-ride.component';
 
 
 import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import {MatCardModule} from '@angular/material/card';
     Routing,
     CustomModule,
     MatCardModule,
+    MatDatepickerModule
   ],
   declarations: [
     AppComponent,
