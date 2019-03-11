@@ -35,5 +35,22 @@ describe('Ride list', () => {
     expect(page.getRideTitle()).toEqual('Upcoming Rides');
   });
 
+  it('should load every ride with all its contents', () => {
+    const numberOfRides = page.getElementsByCss('rides').count();
+
+    const departureTimesElements = page.getElementsByCss('departure-time').count();
+    const seatsLeftElements = page.getElementsByCss('seats-left').count();
+    const originElements = page.getElementsByCss('origin').count();
+    const destinationElements = page.getElementsByCss('destination').count();
+    const driverElements = page.getElementsByCss('driver').count();
+    const notesElements = page.getElementsByCss('notes').count();
+
+    expect(departureTimesElements).toEqual(numberOfRides);
+    expect(seatsLeftElements).toEqual(numberOfRides);
+    expect(originElements).toEqual(numberOfRides);
+    expect(destinationElements).toEqual(numberOfRides);
+    expect(driverElements).toEqual(numberOfRides);
+    expect(notesElements).toEqual(numberOfRides);
+  });
 });
 
