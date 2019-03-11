@@ -1,54 +1,70 @@
+/* Aligns title with contents horizontally */
 .mat-card-title, .mat-card-subtitle {
   padding-left: 8px;
 }
 
-.rides {
-  margin-bottom: 15px;
-}
+/* Ride card */
+.rides {  margin-bottom: 15px;  }
 
+/* Ride card title */
 .ride-title {
-  display: flex;
   background: #29b6f6 linear-gradient(to right bottom, #29b6f6,#73e8ff);
   color: #fff;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
 }
 
-.ride-title mat-card-title {
-  width: 100%;
-}
-
-.departure-time {
-  padding: 4px 0;
-}
-
 .seats-left {
   display: inline-block;
   padding: 4px 6px;
-  margin-top: 4px;
+  margin-top: 8px;
   border-radius: 2px;
   background-color: #fff;
   color: #000;
   font-weight: bold;
 }
 
-.origin, .destination, .notes {
-  display: inline-block;
-  margin: 2px 2px 2px 0;
-  padding: 6px 6px 6px 0;
-  /*border-radius: 3px;*/
-  /*box-shadow: #cdcdcd 0px 1px 2px;*/
-  /*background-color: #b3e5fc;*/
+/* Ride card contents */
+.ride-info {
+  color: #222;
   font-size: 0.8rem;
 }
 
-.origin small, .destination small, .notes small {
-  display: block;
-  color: #333;
-  font-weight: bold;
-  padding-bottom: 4px;
+/* Displays the origin/destination in a compact, visual way */
+.route {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
 }
 
-#ride-list-title {
-  text-align: center;
+.route mat-icon {
+  align-self: center;
+  margin: 0 4px;
 }
+
+.origin, .destination {
+  background: #ddd;
+  border-radius: 2px;
+  padding: 6px;
+}
+
+/* Driver and notes */
+.driver {
+  margin: 12px 0 8px 0;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.notes {
+  max-width: 500px;
+  padding-top: 8px;
+}
+
+.notes small {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Title */
+#ride-list-title {  text-align: center;  }

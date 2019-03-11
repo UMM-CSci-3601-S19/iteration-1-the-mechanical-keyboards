@@ -13,22 +13,20 @@
         </mat-card-header>
 
         <mat-card-content>
-          <div class="origin">
-            <small>FROM</small>
-            {{ride.origin}}
+          <div class="route">
+            <div class="ride-info origin">{{ride.origin}}</div>
+            <mat-icon>play_arrow</mat-icon>
+            <div class="ride-info destination">{{ride.destination}}</div>
           </div>
-          <div class="destination">
-            <small>TO</small>
-            {{ride.destination}}
+
+          <div class="ride-info driver">
+            {{ride.driver}} is offering this ride
           </div>
 
           <mat-divider [inset]="true"></mat-divider>
 
-          <div class="driver">
-            <p><strong>{{ride.driver}} is offering this ride</strong></p>
-          </div>
-          <div class="notes">
-            <small>NOTES</small>
+          <div class="ride-info notes">
+            <small>DRIVER NOTES:</small>
             {{ride.notes}}
           </div>
         </mat-card-content>
