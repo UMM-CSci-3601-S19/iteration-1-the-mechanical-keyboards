@@ -41,6 +41,7 @@ public class Server {
 
     // RIDE ENDPOINTS
     get("api/rides", rideRequestHandler::getRides);
+    get("api/rides/:id", rideRequestHandler::getRideJSON);
     post("api/rides/new", rideRequestHandler::addNewRide);
   }
 
