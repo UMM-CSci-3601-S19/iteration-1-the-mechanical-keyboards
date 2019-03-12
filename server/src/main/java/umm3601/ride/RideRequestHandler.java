@@ -55,7 +55,7 @@ public class RideRequestHandler {
    */
   public String getRides(Request req, Response res) {
     res.type("application/json");
-    return rideController.getRides();
+    return rideController.getRides(req.queryMap().toMap());
   }
 
   /**

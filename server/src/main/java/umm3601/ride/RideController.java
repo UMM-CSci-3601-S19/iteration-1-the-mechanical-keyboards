@@ -9,6 +9,7 @@ import org.bson.types.ObjectId;
 import umm3601.DatabaseHelper;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -55,12 +56,13 @@ public class RideController {
    *
    * @return an array of Rides in a JSON formatted string
    */
-  public String getRides() {
+  public String getRides(Map<String, String[]> queryParams) {
 
     // server-side filtering will happen here if we sell that in future stories.
     // Right now, this method simply returns all existing rides.
+    Document filterDoc = new Document();
 
-    FindIterable<Document> matchingRides = rideCollection.find();
+    FindIterable<Document> matchingRides = rideCollection.find(filterDoc);
 
     return DatabaseHelper.serializeIterable(matchingRides);
   }
