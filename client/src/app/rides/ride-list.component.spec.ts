@@ -108,7 +108,15 @@ describe('Ride list', () => {
     expect(rideList.rides.some((ride: Ride) => ride.destination === 'Wadena, MN')).toBe(false);
   });
 
-  
+  it('has one ride with departure time \'16:30:00\'', () => {
+    expect(rideList.rides.filter((ride: Ride) => ride.departureTime === '16:30:00').length).toBe(1);
+  });
+
+  it('doesn\'t have a ride with departure time \'17:30:00\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.departureTime === '17:30:00')).toBe(false);
+  });
+
+
 });
 
 describe('Misbehaving Ride List', () => {
