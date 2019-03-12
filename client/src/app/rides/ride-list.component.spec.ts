@@ -70,8 +70,7 @@ describe('Ride list', () => {
     });
   }));
 
-  //notes
-  //Done: origin, destination, departureTime, departureDate, _id,
+  //Affirmative containings: has the following items
   it('contains all the rides', () => {
     expect(rideList.rides.length).toBe(3);
   });
@@ -84,10 +83,6 @@ describe('Ride list', () => {
     expect(rideList.rides.some((ride: Ride) => ride.driver === 'Dennis')).toBe(true);
   });
 
-  it('doesn\'t contain a ride with driver \'Dilbert\'', () => {
-    expect(rideList.rides.some((ride: Ride) => ride.driver === 'Dilbert')).toBe(false);
-  });
-
   it('has two rides that have 3 available seats', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.seatsAvailable === 3).length).toBe(2);
   });
@@ -96,50 +91,56 @@ describe('Ride list', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.origin === 'UMM').length).toBe(2);
   });
 
-  it('doesn\'t contain a ride with origin \'The Circus\'', () => {
-    expect(rideList.rides.some((ride: Ride) => ride.origin === 'The Circus')).toBe(false);
-  });
-
   it('has one ride with destination \'Fergus Falls, MN\'', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.destination === 'Fergus Falls, MN').length).toBe(1);
-  });
-
-  it('doesn\'t have a ride with destination \'Wadena, MN\'', () => {
-    expect(rideList.rides.some((ride: Ride) => ride.destination === 'Wadena, MN')).toBe(false);
   });
 
   it('has one ride with departure time \'16:30:00\'', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.departureTime === '16:30:00').length).toBe(1);
   });
 
-  it('doesn\'t have a ride with departure time \'17:30:00\'', () => {
-    expect(rideList.rides.some((ride: Ride) => ride.departureTime === '17:30:00')).toBe(false);
-  });
-
   it('has one ride with departure date \'3/30/2019\'', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.departureDate === '3/30/2019').length).toBe(1);
   });
 
-  it('doesn\'t have a ride with departure date \'11/30/2019\'', () => {
-    expect(rideList.rides.some((ride: Ride) => ride.departureDate === '11/30/2019')).toBe(false);
-  });
 
   it('has one ride with _id \'dennis_id\'', () => {
     expect(rideList.rides.filter((ride: Ride) => ride._id === 'dennis_id').length).toBe(1);
-  });
-
-  it('doesn\'t have a ride with _id \'bob_id\'', () => {
-    expect(rideList.rides.some((ride: Ride) => ride._id === 'bob_id')).toBe(false);
   });
 
   it('has three rides with notes containing \'These are\'', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.notes.includes('These are')).length).toBe(3);
   });
 
+//  Does not cotain certain fields
+  it('doesn\'t contain a ride with driver \'Dilbert\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.driver === 'Dilbert')).toBe(false);
+  });
+
+  it('doesn\'t contain a ride with origin \'The Circus\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.origin === 'The Circus')).toBe(false);
+  });
+
+  it('doesn\'t have a ride with destination \'Wadena, MN\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.destination === 'Wadena, MN')).toBe(false);
+  });
+
+  it('doesn\'t have a ride with departure time \'17:30:00\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.departureTime === '17:30:00')).toBe(false);
+  });
+
+  it('doesn\'t have a ride with departure date \'11/30/2019\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.departureDate === '11/30/2019')).toBe(false);
+  });
+
+  it('doesn\'t have a ride with _id \'bob_id\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride._id === 'bob_id')).toBe(false);
+  });
+
   it('doesn\'t have a ride with notes \'Smoker\'', () => {
     expect(rideList.rides.some((ride: Ride) => ride.notes === 'Smoker')).toBe(false);
   });
-
+  
 });
 
 describe('Misbehaving Ride List', () => {
