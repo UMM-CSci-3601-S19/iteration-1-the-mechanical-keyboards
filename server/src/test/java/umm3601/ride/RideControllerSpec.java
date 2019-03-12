@@ -9,13 +9,13 @@ import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import umm3601.DatabaseHelper;
+import umm3601.user.UserControllerSpec;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.*;
+import static umm3601.DatabaseHelper.parseJsonArray;
 
 public class RideControllerSpec {
   private RideController rideController;
@@ -75,8 +75,9 @@ public class RideControllerSpec {
 
   @Test
   public void getAllRides() {
-    String jsonResult = rideController.getRides();
-    BsonArray rides = DatabaseHelper.parseJsonArray(jsonResult);
+    Map<String, String[]> emptyMap = new HashMap<>();
+    String jsonResult = rideController.getRides(emptyMap);
+    BsonArray rides = parseJsonArray(jsonResult);
 
     assertEquals("Should be 4 rides", 4, rides.size());
     List<String> drivers = rides
@@ -86,5 +87,24 @@ public class RideControllerSpec {
       .collect(Collectors.toList());
     List<String> expectedDrivers = Arrays.asList("Avery", "Colt", "Ellis", "Michael");
     assertEquals("Drivers should match", expectedDrivers, drivers);
+  }
+
+  @Test
+  public void addRide(){
+    String newId = rideController.addNewRide("Dave Roberts", "I talk a lot about math", 2,
+      "Shopko", "UMM Science Building Parking Lot", "5PM", "5/13/19");
+
+    assertNotNull("Add new ride should return true when ride is added,", newId);
+    Map<String, String[]> argMap = new HashMap<>();
+    argMap.put("driver", new String[]{"Dave Roberts"});
+    String jsonResult = rideController.getRides(argMap);
+    BsonArray docs = parseJsonArray(jsonResult);
+
+    List<String> driverName = docs
+      .stream()
+      .map(RideControllerSpec::getDriver)
+      .sorted()
+      .collect(Collectors.toList());
+    assertEquals("Should return name of new driver", "Dave Roberts", driverName.get(2));
   }
 }
