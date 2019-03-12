@@ -56,13 +56,20 @@ describe('Ride list', () => {
       page.click('add-ride-button');
     });
 
-    it('Should actually add the ride with the information we put in the fields', () => {
+    it('Should add the information we put in the fields without datepicker', () => {
       page.navigateTo();
       page.click('add-ride-button');
 
       page.field('driverField').sendKeys('John Doe');
+      page.field('notesField').sendKeys('Likes to play music. Climate control. Gregarious.')
+      page.field('seatsAvailableField').sendKeys('2');
+      page.field('originField').sendKeys('Morris, MN');
+      page.field('destinationField').sendKeys('Alexandria, MN');
+      page.field('departureTimeField').sendKeys('6:00 PM');
 
-      });
+
+      page.click('exitWithoutAddingButton')
+    });
     });
 });
 
