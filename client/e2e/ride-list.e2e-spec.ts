@@ -16,7 +16,7 @@ browser.driver.controlFlow().execute = function () {
   // If you're tired of it taking long you can remove this call or change the delay
   // to something smaller (even 0).
   origFn.call(browser.driver.controlFlow(), () => {
-    return protractor.promise.delayed(0);
+    return protractor.promise.delayed(100);
   });
 
   return origFn.apply(browser.driver.controlFlow(), args);
@@ -35,22 +35,8 @@ describe('Ride list', () => {
     expect(page.getRideTitle()).toEqual('Upcoming Rides');
   });
 
-  it('should load every ride with all its contents', () => {
-    const numberOfRides = page.getElementsByCss('rides').count();
-
-    const departureTimesElements = page.getElementsByCss('departure-time').count();
-    const seatsLeftElements = page.getElementsByCss('seats-left').count();
-    const originElements = page.getElementsByCss('origin').count();
-    const destinationElements = page.getElementsByCss('destination').count();
-    const driverElements = page.getElementsByCss('driver').count();
-    const notesElements = page.getElementsByCss('notes').count();
-
-    expect(departureTimesElements).toEqual(numberOfRides);
-    expect(seatsLeftElements).toEqual(numberOfRides);
-    expect(originElements).toEqual(numberOfRides);
-    expect(destinationElements).toEqual(numberOfRides);
-    expect(driverElements).toEqual(numberOfRides);
-    expect(notesElements).toEqual(numberOfRides);
+  it('should load some rides', () => {
+    expect(page.elementExistsWithCss('.rides')).toBeTruthy();
   });
 });
 
