@@ -4,9 +4,12 @@ import org.bson.Document;
 import spark.Request;
 import spark.Response;
 
+import java.text.DateFormatSymbols;
+
 public class RideRequestHandler {
 
   private final RideController rideController;
+  private String departureDateDay;
 
   public RideRequestHandler(RideController rideController) {
     this.rideController = rideController;
@@ -59,6 +62,16 @@ public class RideRequestHandler {
   }
 
   /**
+   * Converts a number into a month string (ie 3 -> "March")
+   * Joe (Jun 24, 09), edited by mmcdole (Jun 24, 09) @ https://stackoverflow.com/a/1038580
+   *
+   * @param month the integer to be turned into a month string
+   */
+  public String getMonth(int month) {
+    return new DateFormatSymbols().getMonths()[month-1];
+  }
+
+  /**
    * Method called from Server when the 'api/rides/new' endpoint is received.
    * Gets specified rides info from request and calls addNewRide helper method
    * to append that info to a document
@@ -82,34 +95,32 @@ public class RideRequestHandler {
     //departureDateYYYYMMDD breaks off the irrelevant end data from the "T" and on. From there, month and day are broken off.
     String departureDateISO = newRide.getString("departureDate");
     String departureDateYYYYMMDD = departureDateISO.split("T",2)[0];
-    String departureDateMonth = departureDateYYYYMMDD.split("-",3)[1];
-    String departureDateDayUnformatted = departureDateYYYYMMDD.split("-", 3)[2];
-    System.out.println("date BEFORE conversion: " + departureDateYYYYMMDD);
-    System.out.println("month BEFORE conversion: " + departureDateMonth);
-    System.out.println("day BEFORE conversion: " + departureDateDayUnformatted);
+    String departureDateMonthUnformatted = departureDateYYYYMMDD.split("-",3)[1];
+    String departureDateDayUnformatted = departureDateYYYYMMDD.split("-", 3)[2]
+      .replaceFirst("^0+(?!$)", "");
 
-//    int departureDateDayInt = Integer.parseInt(departureDateDayUnformatted);
-//    if(departureDateDayInt == 1 || departureDateDayInt == 21 || departureDateDayInt == 31) {
-//      String departureDateDay = departureDateDayUnformatted.concat("st");
-//    } else if (departureDateDayInt == 2 || departureDateDayInt == 22) {
-//      String departureDateDay = departureDateDayUnformatted.concat("nd");
-//    } else if (departureDateDayInt == 3 || departureDateDayInt == 23) {
-//      String departureDateDay = departureDateDayUnformatted.concat("rd");
-//    } else {
-//      String departureDateDay = departureDateDayUnformatted.concat("th");
-//    }
-//
-//    String departureDateFinal = ;
-//
-//    System.out.println("date AFTER conversion: " + departureDateYYYYMMDD);
-//    System.out.println("month AFTER conversion: " + departureDateMonth);
-//    System.out.println("day AFTER conversion: " + departureDateDay);
+//    Adds the right ending to dates, like the day 12 to 12th or the day 3 to 3rd
+    int departureDateDayInt = Integer.parseInt(departureDateDayUnformatted);
 
+    if(departureDateDayInt == 1 || departureDateDayInt == 21 || departureDateDayInt == 31) {
+      departureDateDay = departureDateDayUnformatted.concat("st");
+    } else if (departureDateDayInt == 2 || departureDateDayInt == 22) {
+      departureDateDay = departureDateDayUnformatted.concat("nd");
+    } else if (departureDateDayInt == 3 || departureDateDayInt == 23) {
+      departureDateDay = departureDateDayUnformatted.concat("rd");
+    } else {
+      departureDateDay = departureDateDayUnformatted.concat("th");
+    }
 
+//    turns the month number into a month name
+    int departureDateMonthInt = Integer.parseInt(departureDateMonthUnformatted);
+    String departureDateMonth = getMonth(departureDateMonthInt);
+
+    String departureDateFinal = departureDateMonth + " " + departureDateDay;
 
     System.err.println("Adding new ride [driver=" + driver + ", notes=" + notes + ", seatsAvailable=" + seatsAvailable
       + ", origin=" + origin + ", destination=" + destination + ", departureTime=" + departureTime + ", departureDate="
-      + departureDateYYYYMMDD + ']'); //TODO: change date field name
-    return rideController.addNewRide(driver, notes, seatsAvailable, origin, destination, departureTime, departureDateYYYYMMDD); //TODO: change date field name
+      + departureDateFinal + ']');
+    return rideController.addNewRide(driver, notes, seatsAvailable, origin, destination, departureTime, departureDateFinal);
   }
 }
