@@ -1,0 +1,46 @@
+<div layout-gt-sm="row">
+  <div flex-gt-sm="50" flex-offset-gt-sm="25">
+    <h1 id="ride-list-title">Upcoming Rides</h1>
+    <div *ngIf="rides; else ridesError">
+      <mat-card #elem class="rides" [id]="ride._id.$oid" *ngFor="let ride of this.rides">
+        <mat-card-header class="ride-title">
+          <mat-card-title>
+            <div class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
+            <div class="seats-left">
+              <small>{{ride.seatsAvailable}} SEATS LEFT</small>
+            </div>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="route">
+            <div class="ride-info origin">{{ride.origin}}</div>
+            <mat-icon>play_arrow</mat-icon>
+            <div class="ride-info destination">{{ride.destination}}</div>
+          </div>
+
+          <div class="ride-info driver">
+            {{ride.driver}} is offering this ride
+          </div>
+
+          <mat-divider [inset]="true"></mat-divider>
+
+          <div class="ride-info notes">
+            <small>DRIVER NOTES:</small>
+            {{ride.notes}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <ng-template #ridesError>
+        <mat-error>
+          There was a problem loading the rides. Possibly the server is down or perhaps there are network
+          issues.
+        </mat-error>
+        <mat-error>
+          Please wait a bit and try again or start the server.
+        </mat-error>
+      </ng-template>
+  </div>
+</div>
