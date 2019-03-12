@@ -70,6 +70,8 @@ describe('Ride list', () => {
     });
   }));
 
+  //destination, departureTime, departureDate, _id, notes
+  //Done: origin
   it('contains all the rides', () => {
     expect(rideList.rides.length).toBe(3);
   });
@@ -88,6 +90,14 @@ describe('Ride list', () => {
 
   it('has two rides that have 3 available seats', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.seatsAvailable === 3).length).toBe(2);
+  });
+
+  it('has two rides with origin \'UMM\'', () => {
+    expect(rideList.rides.filter((ride: Ride) => ride.origin === 'UMM').length).toBe(2);
+  });
+
+  it('doesn\'t contain a ride with origin \'The Circus\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.origin === 'The Circus')).toBe(false);
   });
 });
 
