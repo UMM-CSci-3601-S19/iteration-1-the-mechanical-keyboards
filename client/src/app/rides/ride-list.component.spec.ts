@@ -70,8 +70,8 @@ describe('Ride list', () => {
     });
   }));
 
-  //departureTime, departureDate, _id, notes
-  //Done: origin, destination
+  //departureDate, _id, notes
+  //Done: origin, destination, departureTime,
   it('contains all the rides', () => {
     expect(rideList.rides.length).toBe(3);
   });
@@ -116,6 +116,13 @@ describe('Ride list', () => {
     expect(rideList.rides.some((ride: Ride) => ride.departureTime === '17:30:00')).toBe(false);
   });
 
+  it('has one ride with departure date \'3/30/2019\'', () => {
+    expect(rideList.rides.filter((ride: Ride) => ride.departureDate === '3/30/2019').length).toBe(1);
+  });
+
+  it('doesn\'t have a ride with departure date \'11/30/2019\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.departureDate === '11/30/2019')).toBe(false);
+  });
 
 });
 
