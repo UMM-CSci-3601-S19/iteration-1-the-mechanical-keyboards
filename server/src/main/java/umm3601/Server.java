@@ -4,13 +4,17 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import spark.Request;
 import spark.Response;
-import umm3601.ride.RideController;
-import umm3601.ride.RideRequestHandler;
+import spark.Route;
+import spark.utils.IOUtils;
 import umm3601.user.UserController;
 import umm3601.user.UserRequestHandler;
+import umm3601.ride.RideController;
+import umm3601.ride.RideRequestHandler;
 
 import static spark.Spark.*;
 import static spark.debug.DebugScreen.enableDebugScreen;
+
+import java.io.InputStream;
 
 public class Server {
   private static final String databaseName = "dev";
@@ -55,6 +59,13 @@ public class Server {
 
     // Specify where assets like images will be "stored"
     staticFiles.location("/public");
+    
+        Route clientRoute = (req, res) -> {
+	InputStream stream = Server.class.getResourceAsStream("/public/index.html");
+	return IOUtils.toString(stream);
+    };
+
+    get("/", clientRoute);
 
     options("/*", (request, response) -> {
 
@@ -79,6 +90,8 @@ public class Server {
     // There's a similar "before" method that can be used to modify requests
     // before they they're processed by things like `get`.
     after("*", Server::addGzipHeader);
+
+    get("/*", clientRoute);
 
     // Handle "404" file not found requests:
     notFound((req, res) -> {
