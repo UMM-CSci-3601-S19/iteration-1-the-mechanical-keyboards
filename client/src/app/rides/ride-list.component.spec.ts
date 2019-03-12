@@ -70,8 +70,8 @@ describe('Ride list', () => {
     });
   }));
 
-  //_id, notes
-  //Done: origin, destination, departureTime, departureDate,
+  //notes
+  //Done: origin, destination, departureTime, departureDate, _id,
   it('contains all the rides', () => {
     expect(rideList.rides.length).toBe(3);
   });
@@ -130,6 +130,14 @@ describe('Ride list', () => {
 
   it('doesn\'t have a ride with _id \'bob_id\'', () => {
     expect(rideList.rides.some((ride: Ride) => ride._id === 'bob_id')).toBe(false);
+  });
+
+  // it('has three rides with notes containing \'These are\'', () => {
+  //   expect(rideList.rides.filter((ride: Ride) => ride.notes ===  'These are').length).toBe(3);
+  // });
+
+  it('doesn\'t have a ride with notes \'Smoker\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.notes === 'Smoker')).toBe(false);
   });
 
 });
