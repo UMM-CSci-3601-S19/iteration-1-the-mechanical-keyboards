@@ -132,9 +132,9 @@ describe('Ride list', () => {
     expect(rideList.rides.some((ride: Ride) => ride._id === 'bob_id')).toBe(false);
   });
 
-  // it('has three rides with notes containing \'These are\'', () => {
-  //   expect(rideList.rides.filter((ride: Ride) => ride.notes ===  'These are').length).toBe(3);
-  // });
+  it('has three rides with notes containing \'These are\'', () => {
+    expect(rideList.rides.filter((ride: Ride) => ride.notes.includes('These are')).length).toBe(3);
+  });
 
   it('doesn\'t have a ride with notes \'Smoker\'', () => {
     expect(rideList.rides.some((ride: Ride) => ride.notes === 'Smoker')).toBe(false);
