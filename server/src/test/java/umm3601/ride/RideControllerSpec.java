@@ -107,4 +107,14 @@ public class RideControllerSpec {
       .collect(Collectors.toList());
     assertEquals("Should return name of new driver", "Dave Roberts", driverName.get(2));
   }
+
+  @Test
+  public void getDriverByRideId() {
+    String jsonResult = rideController.getRide(ellisRideId.toHexString());
+    Document ellis = Document.parse(jsonResult);
+    assertEquals("Name should match", "Ellis", ellis.get("driver"));
+    String noJsonResult = rideController.getRide(new ObjectId().toString());
+    assertNull("No driver name should match", noJsonResult);
+
+  }
 }
