@@ -6,43 +6,13 @@ import {CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule /*, any 
 import {
   MatListModule, MatButtonModule, MatCardModule, MatIconModule,
   MatInputModule, MatMenuModule, MatSidenavModule, MatToolbarModule,
-  MatExpansionModule, MatTooltipModule, MatDialogModule,
+  MatExpansionModule, MatTooltipModule, MatDialogModule, MAT_DATE_LOCALE,
 } from '@angular/material';
 
 //michael test 3/11/19 from angular-material's datepicker doc
 import {
-  MatAutocompleteModule,
-  MatButtonModule,
-  MatButtonToggleModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatChipsModule,
   MatDatepickerModule,
-  MatDialogModule,
-  MatDividerModule,
-  MatExpansionModule,
-  MatGridListModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
   MatNativeDateModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSliderModule,
-  MatSlideToggleModule,
-  MatSnackBarModule,
-  MatSortModule,
-  MatStepperModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
 } from '@angular/material';
 
 import {FlexLayoutModule,} from '@angular/flex-layout';
@@ -72,7 +42,8 @@ const MATERIAL_MODULES: any[] = [
   MatExpansionModule,
   MatTooltipModule,
   MatDialogModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatDatepickerModule
 ];
 
 const COVALENT_MODULES: any[] = [
@@ -95,6 +66,9 @@ const COVALENT_MODULES: any[] = [
     MATERIAL_MODULES,
     COVALENT_MODULES,
     FLEX_LAYOUT_MODULES,
+  ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-US'},
   ]
 })
 

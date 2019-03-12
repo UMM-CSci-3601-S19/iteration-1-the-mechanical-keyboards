@@ -5,17 +5,22 @@ import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {RideListComponent} from "./ride-list.component";
 import {RideListService} from "./ride-list.service";
 import {Observable} from "rxjs/Observable";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
 @Component({
   selector: 'add-ride.component',
   templateUrl: 'add-ride.component.html',
   styleUrls: ['./add-ride.component.scss'],
-  providers: [ RideListComponent ]
+  providers: [ RideListComponent,
+    // {provide: DateAdapter, useClass: DateAdapter, deps: [MAT_DATE_LOCALE]},
+    // {provide: MAT_DATE_FORMATS, useValue: MAT_DATE_FORMATS},
+  ],
 })
+
 export class AddRideComponent implements OnInit {
 
-  date = new FormControl(new Date());
-  serializedDate = new FormControl((new Date()));
+  // date = new FormControl(new Date());
+  // serializedDate = new FormControl((new Date()).toLocaleDateString("en-US"));
 
   public rides: Ride[];
 

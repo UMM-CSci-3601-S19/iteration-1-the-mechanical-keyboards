@@ -13,22 +13,22 @@
         </mat-form-field>
 
         <mat-form-field>
-        <input class="inputRideInfo" matInput #input id="notesField" placeholder="Notes"
+          <input class="inputRideInfo" matInput #input id="notesField" placeholder="Notes"
                required [(ngModel)]="rideNotes">
         </mat-form-field>
 
         <mat-form-field>
-        <input class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
+          <input type="number" class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
                required [(ngModel)]="rideSeats">
         </mat-form-field>
 
         <mat-form-field>
-        <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
+          <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
                required [(ngModel)]="rideOrigin">
         </mat-form-field>
 
         <mat-form-field>
-        <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
+          <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
                required [(ngModel)]="rideDestination">
         </mat-form-field>
 
@@ -36,13 +36,13 @@
         <!--<input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"-->
                <!--required [(ngModel)]="rideDepartureDate">-->
           <input class="inputRideInfo" id="departureDateField" matInput [matDatepicker]="picker"
-                 placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate" [formControl]="serializedDate">
+                 placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-        <input class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
+          <input class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
                required [(ngModel)]="rideDepartureTime">
         </mat-form-field>
 
