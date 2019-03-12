@@ -103,7 +103,6 @@ describe('Ride list', () => {
     expect(rideList.rides.filter((ride: Ride) => ride.departureDate === '3/30/2019').length).toBe(1);
   });
 
-
   it('has one ride with _id \'dennis_id\'', () => {
     expect(rideList.rides.filter((ride: Ride) => ride._id === 'dennis_id').length).toBe(1);
   });
@@ -140,7 +139,6 @@ describe('Ride list', () => {
   it('doesn\'t have a ride with notes \'Smoker\'', () => {
     expect(rideList.rides.some((ride: Ride) => ride.notes === 'Smoker')).toBe(false);
   });
-  
 });
 
 describe('Misbehaving Ride List', () => {

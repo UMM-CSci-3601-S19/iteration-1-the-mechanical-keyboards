@@ -78,11 +78,38 @@ public class RideRequestHandler {
     String origin = newRide.getString("origin");
     String destination = newRide.getString("destination");
     String departureTime = newRide.getString("departureTime");
-    String departureDate = newRide.getString("departureDate");
+    //Date from the datepicker is by default in ISO time, like "2019-03-13T05:00:00.000Z". departureDateISO retrieves that.
+    //departureDateYYYYMMDD breaks off the irrelevant end data from the "T" and on. From there, month and day are broken off.
+    String departureDateISO = newRide.getString("departureDate");
+    String departureDateYYYYMMDD = departureDateISO.split("T",2)[0];
+    String departureDateMonth = departureDateYYYYMMDD.split("-",3)[1];
+    String departureDateDayUnformatted = departureDateYYYYMMDD.split("-", 3)[2];
+    System.out.println("date BEFORE conversion: " + departureDateYYYYMMDD);
+    System.out.println("month BEFORE conversion: " + departureDateMonth);
+    System.out.println("day BEFORE conversion: " + departureDateDayUnformatted);
+
+//    int departureDateDayInt = Integer.parseInt(departureDateDayUnformatted);
+//    if(departureDateDayInt == 1 || departureDateDayInt == 21 || departureDateDayInt == 31) {
+//      String departureDateDay = departureDateDayUnformatted.concat("st");
+//    } else if (departureDateDayInt == 2 || departureDateDayInt == 22) {
+//      String departureDateDay = departureDateDayUnformatted.concat("nd");
+//    } else if (departureDateDayInt == 3 || departureDateDayInt == 23) {
+//      String departureDateDay = departureDateDayUnformatted.concat("rd");
+//    } else {
+//      String departureDateDay = departureDateDayUnformatted.concat("th");
+//    }
+//
+//    String departureDateFinal = ;
+//
+//    System.out.println("date AFTER conversion: " + departureDateYYYYMMDD);
+//    System.out.println("month AFTER conversion: " + departureDateMonth);
+//    System.out.println("day AFTER conversion: " + departureDateDay);
+
+
 
     System.err.println("Adding new ride [driver=" + driver + ", notes=" + notes + ", seatsAvailable=" + seatsAvailable
       + ", origin=" + origin + ", destination=" + destination + ", departureTime=" + departureTime + ", departureDate="
-      + departureDate + ']');
-    return rideController.addNewRide(driver, notes, seatsAvailable, origin, destination, departureTime, departureDate);
+      + departureDateYYYYMMDD + ']'); //TODO: change date field name
+    return rideController.addNewRide(driver, notes, seatsAvailable, origin, destination, departureTime, departureDateYYYYMMDD); //TODO: change date field name
   }
 }
