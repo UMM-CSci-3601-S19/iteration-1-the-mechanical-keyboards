@@ -3,7 +3,7 @@ import {Key} from 'selenium-webdriver';
 
 export class RidePage {
   navigateTo(): promise.Promise<any> {
-    return browser.get('/users');
+    return browser.get('/rides');
   }
 
   // http://www.assertselenium.com/protractor/highlight-elements-during-your-protractor-test-run/
@@ -42,27 +42,27 @@ export class RidePage {
   }
 
   getSeatNumber(company: string) {
-    const input = element(by.id('userSeatsAvailable'));
+    const input = element(by.id('rideSeatsAvailable'));
     input.click();
     input.sendKeys(company);
     this.click('submit');
   }
 
-  getUserByAge() {
-    const input = element(by.id('userName'));
+  getRideByAge() {
+    const input = element(by.id('rideName'));
     input.click();
     input.sendKeys(Key.TAB);
   }
 
-  getUniqueUser(email: string) {
-    const user = element(by.id(email)).getText();
+  getUniqueRide(email: string) {
+    const ride = element(by.id(email)).getText();
     this.highlightElement(by.id(email));
 
-    return user;
+    return ride;
   }
 
-  getUsers() {
-    return element.all(by.className('users'));
+  getRides() {
+    return element.all(by.className('rides'));
   }
 
   elementExistsWithId(idOfElement: string): promise.Promise<boolean> {
@@ -93,6 +93,13 @@ export class RidePage {
   getTextFromField(idOfField: string) {
     this.highlightElement(by.id(idOfField));
     return element(by.id(idOfField)).getText();
+  }
+
+  getAddRideTitle() {
+    const title = element(by.id('ride-add-title')).getText();
+    this.highlightElement(by.id('ride-add-title'));
+
+    return title;
   }
 
 }
