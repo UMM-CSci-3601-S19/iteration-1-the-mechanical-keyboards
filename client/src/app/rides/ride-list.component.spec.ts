@@ -70,8 +70,8 @@ describe('Ride list', () => {
     });
   }));
 
-  //destination, departureTime, departureDate, _id, notes
-  //Done: origin
+  //departureTime, departureDate, _id, notes
+  //Done: origin, destination
   it('contains all the rides', () => {
     expect(rideList.rides.length).toBe(3);
   });
@@ -99,6 +99,16 @@ describe('Ride list', () => {
   it('doesn\'t contain a ride with origin \'The Circus\'', () => {
     expect(rideList.rides.some((ride: Ride) => ride.origin === 'The Circus')).toBe(false);
   });
+
+  it('has one ride with destination \'Fergus Falls, MN\'', () => {
+    expect(rideList.rides.filter((ride: Ride) => ride.destination === 'Fergus Falls, MN').length).toBe(1);
+  });
+
+  it('doesn\'t have a ride with destination \'Wadena, MN\'', () => {
+    expect(rideList.rides.some((ride: Ride) => ride.destination === 'Wadena, MN')).toBe(false);
+  });
+
+  
 });
 
 describe('Misbehaving Ride List', () => {
