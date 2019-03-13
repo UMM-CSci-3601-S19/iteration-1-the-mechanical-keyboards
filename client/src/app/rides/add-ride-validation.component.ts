@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatFormField} from '@angular/material';
 import {Ride} from './ride';
-import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
+import {FormControl, Validators, FormGroup, FormBuilder, ValidatorFn, AbstractControl} from "@angular/forms";
 import {AddRideComponent} from "./add-ride.component";
 
 @Component({
@@ -126,4 +126,13 @@ export class AddRideValidationComponent implements OnInit {
     this.createForms();
   }
 
+
+}
+
+/** A hero's name can't match the given regular expression */
+export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const forbidden = nameRe.test(control.value);
+    return forbidden ? {'forbiddenName': {value: control.value}} : null;
+  };
 }
