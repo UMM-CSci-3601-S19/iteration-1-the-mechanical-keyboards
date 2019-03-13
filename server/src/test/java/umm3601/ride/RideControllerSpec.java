@@ -73,6 +73,11 @@ public class RideControllerSpec {
     return ((BsonString) ride.get("driver")).getValue();
   }
 
+  private static String getDepartureDate(BsonValue val) {
+    BsonDocument ride = val.asDocument();
+    return ((BsonString) ride.get("departureDate")).getValue();
+  }
+
   @Test
   public void getAllRides() {
     Map<String, String[]> emptyMap = new HashMap<>();
@@ -115,6 +120,6 @@ public class RideControllerSpec {
     assertEquals("Name should match", "Ellis", ellis.get("driver"));
     String noJsonResult = rideController.getRide(new ObjectId().toString());
     assertNull("No driver name should match", noJsonResult);
-
   }
+
 }

@@ -6,12 +6,19 @@
       <mat-card-title id="ride-add-title" class="rideAddTitle">Add a Ride</mat-card-title>
       <mat-card-content class="addARideContent">
 
-        <!–– [(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes. ––>
-        <!–– formControl[field] = "field" as well.  ––>
+        <!--[(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes.-->
+        <!--formControl[field] = "field" as well. -->
 
+        <!--<div [formGroup]="addRideForm">-->
         <mat-form-field>
           <input class="inputRideInfo" matInput #input id="driverField" placeholder="Driver" required
                  [(ngModel)]="rideDriver">
+          <!--<mat-error *ngFor="let validation of add_ride_validation_messages.driver">-->
+            <!--<mat-error class="error-message" id="user-error"-->
+                       <!--*ngIf="addRideForm.get('driver').hasError(validation.type) && (addRideForm.get('driver').dirty || addRideForm.get('driver').touched)">-->
+              <!--{{validation.message}}-->
+            <!--</mat-error>-->
+          <!--</mat-error>-->
         </mat-form-field>
 
         <mat-form-field>
@@ -43,9 +50,10 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
+          <input type="time" class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
                required [(ngModel)]="rideDepartureTime">
         </mat-form-field>
+        <!--</div>-->
 
       </mat-card-content>
 

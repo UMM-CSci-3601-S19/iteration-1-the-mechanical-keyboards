@@ -5,6 +5,8 @@ import spark.Request;
 import spark.Response;
 
 import java.text.DateFormatSymbols;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class RideRequestHandler {
 
@@ -85,12 +87,20 @@ public class RideRequestHandler {
 
     Document newRide = Document.parse(req.body());
 
+    System.out.println(newRide);
+
     String driver = newRide.getString("driver");
     String notes = newRide.getString("notes");
     int seatsAvailable = newRide.getInteger("seatsAvailable");
     String origin = newRide.getString("origin");
     String destination = newRide.getString("destination");
-    String departureTime = newRide.getString("departureTime");
+    String departureTimeUnformatted = newRide.getString("departureTime");
+
+    // Agamprett Singh (Jul 3, 2018) @ https://www.quora.com/How-can-I-convert-the-24-hour-time-format-into-the-12-hour-format-in-Java/answer/Agampreet-Singh-4
+    // Converts 24 hour time to 12 hour AM/PM time
+    String departureTime = LocalTime.parse(departureTimeUnformatted, DateTimeFormatter.ofPattern("HH:mm"))
+      .format(DateTimeFormatter.ofPattern("hh:mm a"));
+
     //Date from the datepicker is by default in ISO time, like "2019-03-13T05:00:00.000Z". departureDateISO retrieves that.
     //departureDateYYYYMMDD breaks off the irrelevant end data from the "T" and on. From there, month and day are broken off.
     String departureDateISO = newRide.getString("departureDate");
