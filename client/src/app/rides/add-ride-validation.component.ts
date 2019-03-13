@@ -126,13 +126,22 @@ export class AddRideValidationComponent implements OnInit {
     this.createForms();
   }
 
-
 }
 
-/** A hero's name can't match the given regular expression */
-export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} | null => {
-    const forbidden = nameRe.test(control.value);
-    return forbidden ? {'forbiddenName': {value: control.value}} : null;
-  };
-}
+//Removed html from add-ride.component.html
+
+// <!--[(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes.-->
+// <!--formControl[field] = "field" as well. -->
+//
+// <!--<div [formGroup]="addRideForm">-->
+//
+// <!--<mat-error *ngFor="let validation of add_ride_validation_messages.driver">-->
+// <!--<mat-error class="error-message" id="user-error"-->
+// <!--*ngIf="addRideForm.get('driver').hasError(validation.type) && (addRideForm.get('driver').dirty || addRideForm.get('driver').touched)">-->
+// <!--{{validation.message}}-->
+// <!--</mat-error>-->
+// <!--</mat-error>-->
+
+//.....
+
+// </div>

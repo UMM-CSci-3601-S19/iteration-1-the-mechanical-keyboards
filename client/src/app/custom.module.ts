@@ -1,5 +1,5 @@
-import {NgModule,} from '@angular/core';
-import {CommonModule,} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
 import {CovalentLayoutModule, CovalentStepsModule, CovalentCommonModule /*, any other modules */} from '@covalent/core';
 

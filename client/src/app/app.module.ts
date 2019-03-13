@@ -20,7 +20,6 @@ import {CustomModule} from './custom.module';
 import {AddUserComponent} from './users/add-user.component';
 import {AddRideComponent} from './rides/add-ride.component';
 
-
 import {MatCardModule} from '@angular/material/card';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
@@ -43,7 +42,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 
     UserComponent,
 
-    AddUserComponent, AddRideComponent
+    AddUserComponent, AddRideComponent,
 
   ],
   providers: [

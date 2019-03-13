@@ -6,23 +6,17 @@
       <mat-card-title id="ride-add-title" class="rideAddTitle">Add a Ride</mat-card-title>
       <mat-card-content class="addARideContent">
 
-        <!--[(ngModel)]="data.ride.[fieldhere]" will be changed to the relevant model when the time comes.-->
-        <!--formControl[field] = "field" as well. -->
-
-        <!--<div [formGroup]="addRideForm">-->
         <mat-form-field>
-          <input name="name" required minlength="2" class="inputRideInfo" matInput #input id="name" placeholder="Driver" required
+          <input name="name"
+                 required minlength="2" pattern="[a-zA-Z ]*" maxlength="80"
+                 class="inputRideInfo form-control" matInput #input id="driverID" placeholder="Driver"
                  [(ngModel)]="rideDriver" #name="ngModel">
-          <!--<mat-error *ngFor="let validation of add_ride_validation_messages.driver">-->
-            <!--<mat-error class="error-message" id="user-error"-->
-                       <!--*ngIf="addRideForm.get('driver').hasError(validation.type) && (addRideForm.get('driver').dirty || addRideForm.get('driver').touched)">-->
-              <!--{{validation.message}}-->
-            <!--</mat-error>-->
-          <!--</mat-error>-->
           <div *ngIf="name.invalid && (name.dirty || name.touched)"
                class="alert alert-danger">
-            <div *ngIf="name.errors.required">Name is required.</div>
-            <div *ngIf="name.errors.minlength">Name must be at least two characters long</div>
+            <div *ngIf="name.errors.required">Driver is required.</div>
+            <div *ngIf="name.errors.minlength">Driver must be at least two characters long</div>
+            <div *ngIf="name.errors.maxlength">Maximum characters in driver: 80</div>
+            <div *ngIf="name.errors.pattern">Driver cannot have numbers.</div>
           </div>
         </mat-form-field>
 
