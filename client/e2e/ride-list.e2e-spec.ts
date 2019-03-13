@@ -65,7 +65,7 @@ describe('Ride list', () => {
       page.field('seatsAvailableField').sendKeys('2');
       page.field('originField').sendKeys('Morris, MN');
       page.field('destinationField').sendKeys('Alexandria, MN');
-      page.field('departureTimeField').sendKeys('6:00 PM');
+      page.field('departureTimeField').sendKeys('6:00PM');
 
 
       page.click('exitWithoutAddingButton')
