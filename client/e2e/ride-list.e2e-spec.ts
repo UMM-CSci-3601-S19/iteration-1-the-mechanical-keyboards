@@ -16,7 +16,7 @@ browser.driver.controlFlow().execute = function () {
   // If you're tired of it taking long you can remove this call or change the delay
   // to something smaller (even 0).
   origFn.call(browser.driver.controlFlow(), () => {
-    return protractor.promise.delayed(5);
+    return protractor.promise.delayed(50);
   });
 
   return origFn.apply(browser.driver.controlFlow(), args);
@@ -35,8 +35,9 @@ describe('Ride list', () => {
     expect(page.getRideTitle()).toEqual('Available Rides');
   });
 
-
-
+  it('should load some rides', () => {
+    expect(page.elementExistsWithCss('.rides')).toBeTruthy();
+  });
 
   it('Should have an add ride button', () => {
     page.navigateTo();

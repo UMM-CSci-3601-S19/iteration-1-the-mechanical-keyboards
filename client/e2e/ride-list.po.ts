@@ -33,32 +33,11 @@ export class RidePage {
     input.sendKeys(name);
   }
 
-  selectUpKey() {
-    browser.actions().sendKeys(Key.ARROW_UP).perform();
-  }
-
-  backspace() {
-    browser.actions().sendKeys(Key.BACK_SPACE).perform();
-  }
-
   getSeatNumber(company: string) {
     const input = element(by.id('rideSeatsAvailable'));
     input.click();
     input.sendKeys(company);
     this.click('submit');
-  }
-
-  getRideByAge() {
-    const input = element(by.id('rideName'));
-    input.click();
-    input.sendKeys(Key.TAB);
-  }
-
-  getUniqueRide(email: string) {
-    const ride = element(by.id(email)).getText();
-    this.highlightElement(by.id(email));
-
-    return ride;
   }
 
   getRides() {
@@ -74,6 +53,14 @@ export class RidePage {
 
   elementExistsWithCss(cssOfElement: string): promise.Promise<boolean> {
     return element(by.css(cssOfElement)).isPresent();
+  }
+
+  getElementById(id: string) {
+    return element(by.id(id));
+  }
+
+  getElementsByCss(css: string) {
+    return element.all(by.css(css));
   }
 
   click(idOfButton: string): promise.Promise<void> {

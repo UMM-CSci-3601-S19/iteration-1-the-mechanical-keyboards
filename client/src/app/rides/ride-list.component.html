@@ -1,67 +1,53 @@
 <div layout-gt-sm="row">
   <div flex-gt-sm="50" flex-offset-gt-sm="25">
-    <mat-card>
-      <title>MoRide - Available Rides</title>
-      <mat-card-title id="ride-list-title"
-      style="text-align: center">
-        Available Rides
-      </mat-card-title>
-      <mat-card-subtitle>
-        <button mat-raised-button
-                id="add-ride-button"
-                routerLink="/addride"
-                color="primary"
-                type="button"
-                style="width: 100%"
-        >
-          <mat-icon>add_circle_outline</mat-icon>
-          Create a Ride
-        </button>
-      </mat-card-subtitle>
+    <h1 id="ride-list-title">Upcoming Rides</h1>
+    <button mat-raised-button
+            id="add-ride-button"
+            routerLink="/addride"
+            color="primary"
+            type="button"
+            style="width: 100%">
+      <mat-icon>add_circle_outline</mat-icon>
+      Create a Ride
+    </button>
+    <mat-divider></mat-divider>
+    <div *ngIf="rides; else ridesError">
+      <mat-card #elem class="rides" [id]="ride._id.$oid" *ngFor="let ride of this.rides">
+        <mat-card-header class="ride-title">
+          <mat-card-title>
+            <div class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
+            <div class="seats-left">
+              <small>{{ride.seatsAvailable}} SEATS LEFT</small>
+            </div>
+          </mat-card-title>
+        </mat-card-header>
 
-      <mat-divider ></mat-divider>
+        <mat-card-content>
+          <div class="route">
+            <div class="ride-info origin">{{ride.origin}}</div>
+            <mat-icon>play_arrow</mat-icon>
+            <div class="ride-info destination">{{ride.destination}}</div>
+          </div>
 
-      <mat-card-content>
+          <div class="ride-info driver">
+            {{ride.driver}} is offering this ride
+          </div>
 
-        <div class="cardlist" *ngIf="rides; else ridesError">
-          <mat-card #elem class="rides" [id]="ride._id"
-                    *ngFor="let ride of this.rides">
-            <mat-card-header class="ride-title">
-              <mat-card-title [id]="ride.origin">
-                <div class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
-                <div class="seats-left">
-                  <small>{{ride.seatsAvailable}} SEATS LEFT</small>
-                </div>
-              </mat-card-title>
-            </mat-card-header>
+          <mat-divider [inset]="true"></mat-divider>
 
-            <mat-card-content>
-              <div class="origin">
-                <small>FROM</small>
-                {{ride.origin}}
-              </div>
-              <div class="destination">
-                <small>TO</small>
-                {{ride.destination}}
-              </div>
-              <mat-divider></mat-divider>
-              <p><strong>{{ride.driver}} is offering this ride</strong></p>
-              <div class="notes">
-                <small>NOTES</small>
-                {{ride.notes}}
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
+          <div class="ride-info notes">
+            <small>DRIVER NOTES:</small>
+            {{ride.notes}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
 
-        <ng-template #ridesError>
-          <mat-error>
-            There was a problem loading the rides. Possibly the server is down or perhaps there are network
-            issues.
-          </mat-error>
-        </ng-template>
-
-      </mat-card-content>
-    </mat-card>
+    <ng-template #ridesError>
+        <mat-error>
+          There was a problem loading the rides. Possibly the server is down or perhaps there are network
+          issues.
+        </mat-error>
+      </ng-template>
   </div>
 </div>
