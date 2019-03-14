@@ -1,79 +1,73 @@
 <div layout-gt-sm="row">
   <div flex-gt-sm="40" flex-offset-gt-sm="30">
-    <mat-card class="addARide">
-      <title>MoRide - Add a Ride</title>
+    <form [formGroup]="addRideForm">
+      <mat-card class="addARide">
+        <title>MoRide - Add a Ride</title>
 
-      <mat-card-title id="ride-add-title" class="rideAddTitle">Add a Ride</mat-card-title>
-      <mat-card-content class="addARideContent">
+        <mat-card-title id="ride-add-title" class="rideAddTitle">Add a Ride</mat-card-title>
+        <mat-card-content class="addARideContent">
 
-        <mat-form-field>
-          <input name="name"
-                 required minlength="2" pattern="[a-zA-Z ]*" maxlength="80"
-                 class="inputRideInfo form-control" matInput #input id="driverID" placeholder="Driver"
-                 [(ngModel)]="rideDriver" #name="ngModel">
-          <div *ngIf="name.invalid && (name.dirty || name.touched)"
-               class="alert alert-danger">
-            <div *ngIf="name.errors.required">Driver is required.</div>
-            <div *ngIf="name.errors.minlength">Driver must be at least two characters long</div>
-            <div *ngIf="name.errors.maxlength">Maximum characters in driver: 80</div>
-            <div *ngIf="name.errors.pattern">Driver cannot have numbers.</div>
-          </div>
-        </mat-form-field>
+          <mat-form-field>
+            <input name="driverField" matInput #input id="driverID" placeholder="Driver"
+                   [(ngModel)]="rideDriver" formControlName="driver">
+            <mat-error *ngFor="let validation of add_ride_validation_messages.driver">
+              <mat-error class="error-message"
+                         *ngIf="addRideForm.get('driver').hasError(validation.type) &&
+                       (addRideForm.get('driver').dirty || addRideForm.get('driver').touched)">
+                {{validation.message}}
+              </mat-error>
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input type="number" class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
-                 required [(ngModel)]="rideSeats">
-        </mat-form-field>
+          <mat-form-field>
+            <input type="number" class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
+                   required [(ngModel)]="rideSeats">
+          </mat-form-field>
 
-        <br/>
+          <br/>
 
-        <mat-form-field>
-          <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
-                 required [(ngModel)]="rideOrigin">
-        </mat-form-field>
+          <mat-form-field>
+            <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
+                   required [(ngModel)]="rideOrigin">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
-                 required [(ngModel)]="rideDestination">
-        </mat-form-field>
+          <mat-form-field>
+            <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
+                   required [(ngModel)]="rideDestination">
+          </mat-form-field>
 
-        <br/>
+          <br/>
 
-        <mat-form-field>
-          <!--<input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"-->
-          <!--required [(ngModel)]="rideDepartureDate">-->
-          <input class="inputRideInfo" id="departureDateField" matInput [matDatepicker]="picker"
-                 placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <mat-form-field>
+            <input class="inputRideInfo" id="departureDateField" matInput [matDatepicker]="picker"
+                   placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input type="time" class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
-                 [(ngModel)]="rideDepartureTime">
-        </mat-form-field>
+          <mat-form-field>
+            <input type="time" class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
+                   [(ngModel)]="rideDepartureTime">
+          </mat-form-field>
 
-        <br/>
+          <br/>
 
-        <mat-form-field>
-          <textarea class="inputRideInfo" matInput #input id="notesField" placeholder="Notes" [(ngModel)]="rideNotes"></textarea>
-        </mat-form-field>
+          <mat-form-field>
+            <textarea class="inputRideInfo" matInput #input id="notesField" placeholder="Notes" [(ngModel)]="rideNotes"></textarea>
+          </mat-form-field>
 
-        <!--</div>-->
+        </mat-card-content>
 
-      </mat-card-content>
-
-      <mat-card-actions layout="row">
-        <!-- [mat-dialog-close]="data.user" causes the data.user object to be returned when the dialog is closed. -->
-        <button class="addRideButton" mat-raised-button id="confirmAddRideButton"  type="button" color="primary"
-                (click)="addRide()" routerLink="/rides" [disabled]="name.invalid">Add Ride
-        </button>
-        <!-- [mat-dialog-close]="null" causes null to be returned when the dialog is closed. -->
-        <button class="cancelRideButton" mat-button id="exitWithoutAddingButton" routerLink="/rides"  type="button">Cancel</button>
-      </mat-card-actions>
+        <mat-card-actions layout="row">
+          <button class="addRideButton" mat-raised-button id="confirmAddRideButton"  type="button" color="primary"
+                  (click)="addRide()" routerLink="/rides" [disabled]="!addRideForm.valid">Add Ride
+          </button>
+          <button class="cancelRideButton" mat-button id="exitWithoutAddingButton" routerLink="/rides"  type="button">Cancel</button>
+        </mat-card-actions>
 
 
 
-    </mat-card>
+      </mat-card>
+    </form>
   </div>
 </div>
