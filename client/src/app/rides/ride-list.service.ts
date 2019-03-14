@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {Ride} from './ride';
 import {environment} from '../../environments/environment';
+import {RideListComponent} from "./ride-list.component";
 
 
 @Injectable()
@@ -13,6 +14,12 @@ export class RideListService {
   private rideUrl: string = this.baseUrl;
 
   constructor(private http: HttpClient) {
+  }
+
+  rlc: RideListComponent;
+
+  addListener(rlc){
+    this.rlc = rlc;
   }
 
   getRides(): Observable<Ride[]> {
@@ -32,6 +39,9 @@ export class RideListService {
     };
 
     // Send post request to add a new user with the user data as the body with specified headers.
-    return this.http.post<string>(this.rideUrl + '/new', newRide, httpOptions);
+    var returnObject = this.http.post<string>(this.rideUrl + '/new', newRide, httpOptions);
+    this.rlc.refreshRides();
+    return returnObject;
+
   }
 }

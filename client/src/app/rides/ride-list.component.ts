@@ -16,7 +16,7 @@ export class RideListComponent implements OnInit {
 
   // Inject the RideListService into this component.
   constructor(public rideListService: RideListService) {
-
+    rideListService.addListener(this);
   }
 
   /**
