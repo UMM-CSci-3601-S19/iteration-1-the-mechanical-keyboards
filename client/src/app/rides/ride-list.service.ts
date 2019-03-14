@@ -16,11 +16,12 @@ export class RideListService {
   constructor(private http: HttpClient) {
   }
 
-  rlc: RideListComponent;
+ // rlc: RideListComponent;
 
-  addListener(rlc){
-    this.rlc = rlc;
-  }
+
+ // addListener(rlc){
+ //   this.rlc = rlc;
+ // }
 
   getRides(): Observable<Ride[]> {
     return this.http.get<Ride[]>(this.rideUrl);
@@ -38,9 +39,11 @@ export class RideListService {
       responseType: 'text' as 'json'
     };
 
+
     // Send post request to add a new user with the user data as the body with specified headers.
+
+    //this.rlc.refreshRides();
     const id = this.http.post<string>(this.rideUrl + '/new', newRide, httpOptions);
-    this.rlc.refreshRides();
     return id;
 
   }

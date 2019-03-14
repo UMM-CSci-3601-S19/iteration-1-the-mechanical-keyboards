@@ -71,6 +71,7 @@ export class AddRideComponent implements OnInit {
       this.rideListService.addNewRide(newRide).subscribe(
         result => {
           this.highlightedID = result;
+
         },
         err => {
           // This should probably be turned into some sort of meaningful response.
@@ -78,6 +79,16 @@ export class AddRideComponent implements OnInit {
           console.log('The newRide or dialogResult was ' + newRide);
           console.log('The error was ' + JSON.stringify(err));
         });
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+    //This is the only solution to a refresh-on-addride
+      // we were having that worked consistently, it's hacky but seems to work well.
     }
   };
 
@@ -110,6 +121,24 @@ export class AddRideComponent implements OnInit {
       notes: new FormControl('notes')
     })
   }
+
+  refreshRides(): Observable<Ride[]> {
+    // Get Rides returns an Observable, basically a "promise" that
+    // we will get the data from the server.
+    //
+    // Subscribe waits until the data is fully downloaded, then
+    // performs an action on it (the first lambda)
+    const rides: Observable<Ride[]> = this.rideListService.getRides();
+    rides.subscribe(
+      rides => {
+        this.rides = rides;
+      },
+      err => {
+        console.log(err);
+      });
+    return rides;
+  }
+
 
   ngOnInit() {
     this.createForm();
