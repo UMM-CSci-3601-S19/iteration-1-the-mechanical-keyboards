@@ -1,5 +1,5 @@
 <div layout-gt-sm="row">
-  <div flex-gt-sm="80" flex-offset-gt-sm="10">
+  <div flex-gt-sm="40" flex-offset-gt-sm="30">
     <mat-card class="addARide">
       <title>MoRide - Add a Ride</title>
 
@@ -21,27 +21,27 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input class="inputRideInfo" matInput #input id="notesField" placeholder="Notes" [(ngModel)]="rideNotes">
+          <input type="number" class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
+                 required [(ngModel)]="rideSeats">
         </mat-form-field>
 
-        <mat-form-field>
-          <input type="number" class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
-               required [(ngModel)]="rideSeats">
-        </mat-form-field>
+        <br/>
 
         <mat-form-field>
           <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
-               required [(ngModel)]="rideOrigin">
+                 required [(ngModel)]="rideOrigin">
         </mat-form-field>
 
         <mat-form-field>
           <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
-               required [(ngModel)]="rideDestination">
+                 required [(ngModel)]="rideDestination">
         </mat-form-field>
 
+        <br/>
+
         <mat-form-field>
-        <!--<input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"-->
-               <!--required [(ngModel)]="rideDepartureDate">-->
+          <!--<input class="inputRideInfo" matInput #input id="departureDateField" placeholder="Departure Date"-->
+          <!--required [(ngModel)]="rideDepartureDate">-->
           <input class="inputRideInfo" id="departureDateField" matInput [matDatepicker]="picker"
                  placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -50,8 +50,15 @@
 
         <mat-form-field>
           <input type="time" class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
-               required [(ngModel)]="rideDepartureTime">
+                 [(ngModel)]="rideDepartureTime">
         </mat-form-field>
+
+        <br/>
+
+        <mat-form-field>
+          <textarea class="inputRideInfo" matInput #input id="notesField" placeholder="Notes" [(ngModel)]="rideNotes"></textarea>
+        </mat-form-field>
+
         <!--</div>-->
 
       </mat-card-content>
