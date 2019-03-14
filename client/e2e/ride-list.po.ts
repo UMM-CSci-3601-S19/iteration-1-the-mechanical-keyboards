@@ -68,6 +68,11 @@ export class RidePage {
     return element(by.id(idOfButton)).click();
   }
 
+  clickClass(classOfButton: string): promise.Promise<void> {
+    this.highlightElement(by.className(classOfButton));
+    return element(by.className(classOfButton)).click();
+  }
+
   field(idOfField: string) {
     return element(by.id(idOfField));
   }
