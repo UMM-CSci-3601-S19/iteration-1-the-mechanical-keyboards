@@ -42,7 +42,8 @@ export class AddRideComponent implements OnInit {
 
     'seatsAvailable': [
       {type: 'required', message: 'Please specify how many seats you\'re offering'},
-      {type: 'min', message: 'Please offer at least 1 seat'}
+      {type: 'min', message: 'Please offer at least 1 seat'},
+      {type: 'max', message: 'Can\'t offer more than 12 seats'},
     ],
 
     'origin': [
@@ -70,6 +71,7 @@ export class AddRideComponent implements OnInit {
       this.rideListService.addNewRide(newRide).subscribe(
         result => {
           this.highlightedID = result;
+
         },
         err => {
           // This should probably be turned into some sort of meaningful response.
@@ -78,6 +80,15 @@ export class AddRideComponent implements OnInit {
           console.log('The error was ' + JSON.stringify(err));
         });
       this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+      this.refreshRides();
+    //This is the only solution to a refresh-on-addride
+      // we were having that worked consistently, it's hacky but seems to work well.
     }
   };
 
@@ -91,7 +102,8 @@ export class AddRideComponent implements OnInit {
 
       seatsAvailable: new FormControl('seatsAvailable', Validators.compose([
         Validators.required,
-        Validators.min(1)
+        Validators.min(1),
+        Validators.max(12)
       ])),
 
       origin: new FormControl('origin', Validators.compose([
@@ -126,6 +138,7 @@ export class AddRideComponent implements OnInit {
       });
     return rides;
   }
+
 
   ngOnInit() {
     this.createForm();
