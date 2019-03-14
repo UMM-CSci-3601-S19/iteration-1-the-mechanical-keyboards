@@ -9,7 +9,7 @@
 
           <mat-form-field>
             <input name="driverField" matInput #input id="driverID" placeholder="Driver"
-                   [(ngModel)]="rideDriver" formControlName="driver">
+                   required [(ngModel)]="rideDriver" formControlName="driver">
             <mat-error *ngFor="let validation of add_ride_validation_messages.driver">
               <mat-error class="error-message"
                          *ngIf="addRideForm.get('driver').hasError(validation.type) &&
