@@ -18,8 +18,11 @@ import {APP_BASE_HREF} from '@angular/common';
 import {CustomModule} from './custom.module';
 
 import {AddUserComponent} from './users/add-user.component';
+import {AddRideComponent} from './rides/add-ride.component';
 
 import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 
 @NgModule({
@@ -29,17 +32,17 @@ import {MatCardModule} from '@angular/material/card';
     Routing,
     CustomModule,
     MatCardModule,
+    MatDatepickerModule
   ],
   declarations: [
     AppComponent,
     HomeComponent,
 
-    UserListComponent,
-    RideListComponent,
+    UserListComponent, RideListComponent,
 
     UserComponent,
 
-    AddUserComponent,
+    AddUserComponent, AddRideComponent,
 
   ],
   providers: [
@@ -47,7 +50,7 @@ import {MatCardModule} from '@angular/material/card';
     {provide: APP_BASE_HREF, useValue: '/'},
   ],
   entryComponents: [
-    AddUserComponent
+    AddUserComponent, AddRideComponent
   ],
   bootstrap: [AppComponent]
 })

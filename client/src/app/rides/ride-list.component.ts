@@ -6,7 +6,8 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'ride-list-component',
   templateUrl: 'ride-list.component.html',
-  styleUrls: ['./ride-list.component.css'],
+  styleUrls: ['./ride-list.component.scss'],
+  providers: []
 })
 
 export class RideListComponent implements OnInit {
@@ -28,7 +29,6 @@ export class RideListComponent implements OnInit {
     //
     // Subscribe waits until the data is fully downloaded, then
     // performs an action on it (the first lambda)
-
     const rides: Observable<Ride[]> = this.rideListService.getRides();
     rides.subscribe(
       rides => {

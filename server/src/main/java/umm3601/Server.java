@@ -45,6 +45,8 @@ public class Server {
 
     // RIDE ENDPOINTS
     get("api/rides", rideRequestHandler::getRides);
+    get("api/rides/:id", rideRequestHandler::getRideJSON);
+    post("api/rides/new", rideRequestHandler::addNewRide);
   }
 
   // Enable GZIP for all responses
@@ -59,13 +61,14 @@ public class Server {
 
     // Specify where assets like images will be "stored"
     staticFiles.location("/public");
-    
-        Route clientRoute = (req, res) -> {
-	InputStream stream = Server.class.getResourceAsStream("/public/index.html");
-	return IOUtils.toString(stream);
-    };
 
-    get("/", clientRoute);
+//        Route clientRoute = (req, res) -> {
+//	InputStream stream = Server.class.getResourceAsStream("/public/index.html");
+//	return IOUtils.toString(stream);
+//    };
+
+//    get("/", clientRoute);
+//    get("/*", clientRoute);
 
     options("/*", (request, response) -> {
 
@@ -90,8 +93,6 @@ public class Server {
     // There's a similar "before" method that can be used to modify requests
     // before they they're processed by things like `get`.
     after("*", Server::addGzipHeader);
-
-    get("/*", clientRoute);
 
     // Handle "404" file not found requests:
     notFound((req, res) -> {

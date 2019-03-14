@@ -6,20 +6,57 @@ export class RidePage {
     return browser.get('/rides');
   }
 
+  // http://www.assertselenium.com/protractor/highlight-elements-during-your-protractor-test-run/
+  highlightElement(byObject) {
+    function setStyle(element, style) {
+      const previous = element.getAttribute('style');
+      element.setAttribute('style', style);
+      setTimeout(() => {
+        element.setAttribute('style', previous);
+      }, 200);
+      return 'highlighted';
+    }
+
+    return browser.executeScript(setStyle, element(byObject).getWebElement(), 'color: red; background-color: yellow;');
+  }
+
   getRideTitle() {
-    return element(by.id('ride-list-title')).getText();
+    const title = element(by.id('ride-list-title')).getText();
+    this.highlightElement(by.id('ride-list-title'));
+
+    return title;
+  }
+
+  typeADriverName(name: string) {
+    const input = element(by.id('driverName'));
+    input.click();
+    input.sendKeys(name);
+  }
+
+  getSeatNumber(company: string) {
+    const input = element(by.id('rideSeatsAvailable'));
+    input.click();
+    input.sendKeys(company);
+    this.click('submit');
   }
 
   getRides() {
     return element.all(by.className('rides'));
   }
 
-  elementExistsWithId(id: string): promise.Promise<boolean> {
-    return element(by.id(id)).isPresent();
+  // getClass(theClass: string) {
+  //   return element(by.className(theClass));
+  // }
+
+  elementExistsWithId(idOfElement: string): promise.Promise<boolean> {
+    if (element(by.id(idOfElement)).isPresent()) {
+      this.highlightElement(by.id(idOfElement));
+    }
+    return element(by.id(idOfElement)).isPresent();
   }
 
-  elementExistsWithCss(css: string): promise.Promise<boolean> {
-    return element(by.css(css)).isPresent();
+  elementExistsWithCss(cssOfElement: string): promise.Promise<boolean> {
+    return element(by.css(cssOfElement)).isPresent();
   }
 
   getElementById(id: string) {
@@ -31,6 +68,34 @@ export class RidePage {
   }
 
   click(idOfButton: string): promise.Promise<void> {
+    this.highlightElement(by.id(idOfButton));
     return element(by.id(idOfButton)).click();
   }
+
+  clickClass(classOfButton: string): promise.Promise<void> {
+    this.highlightElement(by.className(classOfButton));
+    return element(by.className(classOfButton)).click();
+  }
+
+  field(idOfField: string) {
+    return element(by.id(idOfField));
+  }
+
+  button(idOfButton: string) {
+    this.highlightElement(by.id(idOfButton));
+    return element(by.id(idOfButton));
+  }
+
+  getTextFromField(idOfField: string) {
+    this.highlightElement(by.id(idOfField));
+    return element(by.id(idOfField)).getText();
+  }
+
+  getAddRideTitle() {
+    const title = element(by.id('ride-add-title')).getText();
+    this.highlightElement(by.id('ride-add-title'));
+
+    return title;
+  }
+
 }
