@@ -67,6 +67,14 @@ export class RidePage {
     return element.all(by.css(css));
   }
 
+  getUniqueRide(driver: string) {
+    const ride = element(by.id(driver)).getText();
+    this.highlightElement(by.id(driver));
+
+    return ride;
+  }
+
+
   click(idOfButton: string): promise.Promise<void> {
     this.highlightElement(by.id(idOfButton));
     return element(by.id(idOfButton)).click();
