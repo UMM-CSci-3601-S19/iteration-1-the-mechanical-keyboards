@@ -9,7 +9,7 @@
         <mat-form-field>
           <input name="name"
                  required minlength="2" pattern="[a-zA-Z ]*" maxlength="80"
-                 class="inputRideInfo form-control" matInput #input id="driverID" placeholder="Driver"
+                 class="inputRideInfo form-control" matInput #input id="driverField" placeholder="Driver"
                  [(ngModel)]="rideDriver" #name="ngModel">
           <div *ngIf="name.invalid && (name.dirty || name.touched)"
                class="alert alert-danger">

@@ -32,7 +32,7 @@ describe('Ride list', () => {
 
   it('should get and highlight Rides title attribute ', () => {
     page.navigateTo();
-    expect(page.getRideTitle()).toEqual('Available Rides');
+    expect(page.getRideTitle()).toEqual('Upcoming Rides');
   });
 
   it('should load some rides', () => {
