@@ -177,3 +177,63 @@ describe('Misbehaving Ride List', () => {
     expect(rideList.rides).toBeUndefined();
   });
 });
+
+// describe('Adding a ride', () => {
+//   let rideList: AddRideComponent;
+//   let fixture: ComponentFixture<AddRideComponent>;
+//   const newRide: Ride = {
+//     _id: 'agatha_id',
+//     driver: 'Agatha',
+//     notes: 'These are Agatha\'s ride notes',
+//     seatsAvailable: 6,
+//     origin: 'UMM',
+//     destination: 'Fergus Falls, MN',
+//     departureDate: '3/30/2019',
+//     departureTime: '16:30:00'
+//   };
+//   const newId = 'sam_id';
+//
+//   let calledRide: Ride;
+//
+//   let rideListServiceStub: {
+//     getRides: () => Observable<Ride[]>,
+//     addNewRide: (newRide: Ride) => Observable<{ '$oid': string }>
+//   };
+//
+//   beforeEach(() => {
+//     calledRide = null;
+//     // stub RideService for test purposes
+//     rideListServiceStub = {
+//       getRides: () => Observable.of([]),
+//       addNewRide: (newRide: Ride) => {
+//         calledRide = newRide;
+//         return Observable.of({
+//           '$oid': newId
+//         });
+//       }
+//     };
+//
+//     TestBed.configureTestingModule({
+//       imports: [FormsModule, CustomModule],
+//       declarations: [AddRideComponent],
+//       providers: [
+//         {provide: RideListService, useValue: rideListServiceStub},
+//         // {provide: MatDialog, useValue: mockMatDialog},
+//       ]
+//     });
+//   });
+//
+//   beforeEach(async(() => {
+//     TestBed.compileComponents().then(() => {
+//       fixture = TestBed.createComponent(AddRideComponent);
+//       rideList = fixture.componentInstance;
+//       fixture.detectChanges();
+//     });
+//   }));
+//
+//   it('calls RideListService.addRide', () => {
+//     expect(calledRide).toBeNull();
+//     rideList.addRide();
+//     expect(calledRide).toEqual(newRide);
+//   });
+// });

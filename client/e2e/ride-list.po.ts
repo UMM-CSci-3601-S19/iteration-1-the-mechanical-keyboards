@@ -44,6 +44,10 @@ export class RidePage {
     return element.all(by.className('rides'));
   }
 
+  // getClass(theClass: string) {
+  //   return element(by.className(theClass));
+  // }
+
   elementExistsWithId(idOfElement: string): promise.Promise<boolean> {
     if (element(by.id(idOfElement)).isPresent()) {
       this.highlightElement(by.id(idOfElement));

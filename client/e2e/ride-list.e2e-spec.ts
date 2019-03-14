@@ -32,7 +32,7 @@ describe('Ride list', () => {
 
   it('should get and highlight Rides title attribute ', () => {
     page.navigateTo();
-    expect(page.getRideTitle()).toEqual('Available Rides');
+    expect(page.getRideTitle()).toEqual('Upcoming Rides');
   });
 
   it('should load some rides', () => {
@@ -49,23 +49,27 @@ describe('Ride list', () => {
     page.click('add-ride-button');
     expect(page.getAddRideTitle()).toEqual('Add a Ride');
   });
+});
 
   describe('Add Ride', () => {
+    let page: RidePage;
 
     beforeEach(() => {
+      page = new RidePage();
       page.navigateTo();
       page.click('add-ride-button');
     });
 
-    it('Should add the information we put in the fields without datepicker', () => {
+    it('Should add the information we put in the fields by keystroke', () => {
       page.navigateTo();
       page.click('add-ride-button');
 
-      page.field('driverField').sendKeys('John Doe');
+      page.field('driverID').sendKeys('John Doe');
       page.field('notesField').sendKeys('Likes to play music. Climate control. Gregarious.');
       page.field('seatsAvailableField').sendKeys('2');
       page.field('originField').sendKeys('Morris, MN');
       page.field('destinationField').sendKeys('Alexandria, MN');
+      page.field('departureDateField').sendKeys('3/13/2019');
       page.field('departureTimeField').sendKeys('6:00PM');
 
 
@@ -91,19 +95,8 @@ describe('Ride list', () => {
 
       page.click('exitWithoutAddingButton')
     });
+  });
 
 
-    it('Should show error message regarding specifying seats', () => {
-      page.navigateTo();
-      page.click('add-ride-button');
 
-      page.click('seatsAvailableField');
-      page.click('originField');
-      page.click('driverID');
-
-      expect(page.getTextFromField('mat-error-7')).toEqual("Please specify how many seats you're offering");
-
-    });
-    });
-});
 
