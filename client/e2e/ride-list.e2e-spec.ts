@@ -49,28 +49,53 @@ describe('Ride list', () => {
     page.click('add-ride-button');
     expect(page.getAddRideTitle()).toEqual('Add a Ride');
   });
-
-  describe('Add Ride', () => {
-
-    beforeEach(() => {
-      page.navigateTo();
-      page.click('add-ride-button');
-    });
-
-    it('Should add the information we put in the fields without datepicker', () => {
-      page.navigateTo();
-      page.click('add-ride-button');
-
-      page.field('driverField').sendKeys('John Doe');
-      page.field('notesField').sendKeys('Likes to play music. Climate control. Gregarious.');
-      page.field('seatsAvailableField').sendKeys('2');
-      page.field('originField').sendKeys('Morris, MN');
-      page.field('destinationField').sendKeys('Alexandria, MN');
-      page.field('departureTimeField').sendKeys('6:00PM');
-
-
-      page.click('exitWithoutAddingButton')
-    });
-    });
 });
+
+describe('Add Ride', () => {
+  let page: RidePage;
+
+  beforeEach(() => {
+    page = new RidePage();
+    page.navigateTo();
+    page.click('add-ride-button');
+  });
+
+  it('Should add the information we put in the fields by keystroke', () => {
+    page.navigateTo();
+    page.click('add-ride-button');
+
+    page.field('driverID').sendKeys('John Doe');
+    page.field('notesField').sendKeys('Likes to play music. Climate control. Gregarious.');
+    page.field('seatsAvailableField').sendKeys('2');
+    page.field('originField').sendKeys('Morris, MN');
+    page.field('destinationField').sendKeys('Alexandria, MN');
+    page.field('departureDateField').sendKeys('3/13/2019');
+    page.field('departureTimeField').sendKeys('6:00PM');
+
+
+    page.click('exitWithoutAddingButton')
+  });
+
+  it('Should add the information we put in the fields by clicking datepicker', () => {
+    page.navigateTo();
+    page.click('add-ride-button');
+
+    page.field('driverID').sendKeys('John Doe');
+    page.field('notesField').sendKeys('Likes to play music. Climate control. Gregarious.');
+    page.field('seatsAvailableField').sendKeys('2');
+    page.field('originField').sendKeys('Morris, MN');
+    page.field('destinationField').sendKeys('Alexandria, MN');
+    // page.field('departureDateField').sendKeys('3/13/2019');
+    // page.click();
+    page.clickClass("mat-datepicker-toggle");
+    page.clickClass("mat-calendar-body-cell-content mat-calendar-body-today");
+    // page.getTextFromField("departureDateField").toBe("");
+
+    page.field('departureTimeField').sendKeys('6:00PM');
+
+    page.click('exitWithoutAddingButton')
+  });
+});
+
+
 
