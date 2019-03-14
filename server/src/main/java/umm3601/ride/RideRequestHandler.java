@@ -94,48 +94,63 @@ public class RideRequestHandler {
     int seatsAvailable = newRide.getInteger("seatsAvailable");
     String origin = newRide.getString("origin");
     String destination = newRide.getString("destination");
-    String departureDate = parseDateAndTime(newRide.getString("departureDate"),newRide.getString("departureTime"))[0];
-    String departureTime = parseDateAndTime(newRide.getString("departureDate"),newRide.getString("departureTime"))[1];
+    String departureDate;
+    String departureTime;
+    System.out.println(newRide.getString("departureDate"));
+    if (!(newRide.getString("departureDate") == null)) {
+      departureDate = parseDateAndTime(newRide.getString("departureDate"),newRide.getString("departureDate"))[0];
+    } else {
+      departureDate = "";
+    }
+    if (!(newRide.getString("departureTime") == null)) {
+      departureTime = parseDateAndTime(newRide.getString("departureTime"),newRide.getString("departureTime"))[1];
+    } else {
+      departureTime = "";
+    }
+
+    System.out.println("date="+departureDate);
+    System.out.println("time="+departureTime);
 
     System.err.println("Adding new ride [driver=" + driver + ", notes=" + notes + ", seatsAvailable=" + seatsAvailable
       + ", origin=" + origin + ", destination=" + destination + ", departureTime=" + departureTime + ", departureDate="
       + departureDate + ']');
     return rideController.addNewRide(driver, notes, seatsAvailable, origin, destination, departureTime, departureDate);
   }
-}
 
-private String[] parseDateAndTime(String date, String time) {
-  String departureTimeUnformatted = time;
+  private String[] parseDateAndTime(String date, String time) {
+    String departureTimeUnformatted = time;
 
-  // Agamprett Singh (Jul 3, 2018) @ https://www.quora.com/How-can-I-convert-the-24-hour-time-format-into-the-12-hour-format-in-Java/answer/Agampreet-Singh-4
-  // Converts 24 hour time to 12 hour AM/PM time
-  String departureTime = LocalTime.parse(departureTimeUnformatted, DateTimeFormatter.ofPattern("HH:mm"))
-    .format(DateTimeFormatter.ofPattern("hh:mm a"));
+    // Agamprett Singh (Jul 3, 2018) @ https://www.quora.com/How-can-I-convert-the-24-hour-time-format-into-the-12-hour-format-in-Java/answer/Agampreet-Singh-4
+    // Converts 24 hour time to 12 hour AM/PM time
+    String departureTime = LocalTime.parse(departureTimeUnformatted, DateTimeFormatter.ofPattern("HH:mm"))
+      .format(DateTimeFormatter.ofPattern("hh:mm a"));
 
-  //Date from the datepicker is by default in ISO time, like "2019-03-13T05:00:00.000Z". departureDateISO retrieves that.
-  //departureDateYYYYMMDD breaks off the irrelevant end data from the "T" and on. From there, month and day are broken off.
-  String departureDateISO = date;
-  String departureDateYYYYMMDD = departureDateISO.split("T",2)[0];
-  String departureDateMonthUnformatted = departureDateYYYYMMDD.split("-",3)[1];
-  String departureDateDayUnformatted = departureDateYYYYMMDD.split("-", 3)[2]
-    .replaceFirst("^0+(?!$)", "");
+    //Date from the datepicker is by default in ISO time, like "2019-03-13T05:00:00.000Z". departureDateISO retrieves that.
+    //departureDateYYYYMMDD breaks off the irrelevant end data from the "T" and on. From there, month and day are broken off.
+    String departureDateISO = date;
+    String departureDateYYYYMMDD = departureDateISO.split("T", 2)[0];
+    String departureDateMonthUnformatted = departureDateYYYYMMDD.split("-", 3)[1];
+    String departureDateDayUnformatted = departureDateYYYYMMDD.split("-", 3)[2]
+      .replaceFirst("^0+(?!$)", "");
 
-//    Adds the right ending to dates, like the day 12 to 12th or the day 3 to 3rd
-  int departureDateDayInt = Integer.parseInt(departureDateDayUnformatted);
+  //    Adds the right ending to dates, like the day 12 to 12th or the day 3 to 3rd
+    int departureDateDayInt = Integer.parseInt(departureDateDayUnformatted);
 
-  if(departureDateDayInt == 1 || departureDateDayInt == 21 || departureDateDayInt == 31) {
-    departureDateDay = departureDateDayUnformatted.concat("st");
-  } else if (departureDateDayInt == 2 || departureDateDayInt == 22) {
-    departureDateDay = departureDateDayUnformatted.concat("nd");
-  } else if (departureDateDayInt == 3 || departureDateDayInt == 23) {
-    departureDateDay = departureDateDayUnformatted.concat("rd");
-  } else {
-    departureDateDay = departureDateDayUnformatted.concat("th");
+    if (departureDateDayInt == 1 || departureDateDayInt == 21 || departureDateDayInt == 31) {
+      departureDateDay = departureDateDayUnformatted.concat("st");
+    } else if (departureDateDayInt == 2 || departureDateDayInt == 22) {
+      departureDateDay = departureDateDayUnformatted.concat("nd");
+    } else if (departureDateDayInt == 3 || departureDateDayInt == 23) {
+      departureDateDay = departureDateDayUnformatted.concat("rd");
+    } else {
+      departureDateDay = departureDateDayUnformatted.concat("th");
+    }
+
+  //    turns the month number into a month name
+    int departureDateMonthInt = Integer.parseInt(departureDateMonthUnformatted);
+    String departureDateMonth = getMonth(departureDateMonthInt);
+
+    String departureDateFinal = departureDateMonth + " " + departureDateDay;
+    return new String[]{departureDateFinal, departureTime};
   }
-
-//    turns the month number into a month name
-  int departureDateMonthInt = Integer.parseInt(departureDateMonthUnformatted);
-  String departureDateMonth = getMonth(departureDateMonthInt);
-
-  String departureDateFinal = departureDateMonth + " " + departureDateDay;
 }
