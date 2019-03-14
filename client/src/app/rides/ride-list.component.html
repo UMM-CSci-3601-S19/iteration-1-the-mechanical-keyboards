@@ -15,7 +15,11 @@
       <mat-card #elem class="rides" [id]="ride._id.$oid" *ngFor="let ride of this.rides">
         <mat-card-header class="ride-title">
           <mat-card-title>
-            <div *ngIf="ride.departureDate && ride.departureTime" class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
+            <div class="departure-time">
+              <span *ngIf="ride.departureDate">{{ride.departureDate}}</span>
+              <span *ngIf="ride.departureDate && ride.departureTime"> at </span>
+              <span *ngIf="ride.departureTime">{{ride.departureTime}}</span>
+            </div>
             <div class="seats-left">
               <small>{{ride.seatsAvailable}} SEATS LEFT</small>
             </div>
@@ -35,9 +39,9 @@
 
           <mat-divider [inset]="true"></mat-divider>
 
-          <div class="ride-info notes">
+          <div  *ngIf="ride.notes" class="ride-info notes">
             <small>DRIVER NOTES:</small>
-            <div *ngIf="ride.notes">{{ride.notes}}</div>
+            <div>{{ride.notes}}</div>
           </div>
         </mat-card-content>
       </mat-card>
