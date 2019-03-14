@@ -73,7 +73,7 @@ describe('Add Ride', () => {
     page.field('departureTimeField').sendKeys('6:00PM');
 
 
-    page.click('confirmAddRideButton')
+    page.click('confirmAddRideButton');
     expect(page.getRideTitle()).toEqual('Upcoming Rides');
     expect(page.getUniqueRide('John Doe')).toMatch('Likes to play music. Climate control. Gregarious.');
     expect(page.getUniqueRide('John Doe')).toMatch('2');
