@@ -15,7 +15,7 @@
       <mat-card #elem class="rides" [id]="ride._id.$oid" *ngFor="let ride of this.rides">
         <mat-card-header class="ride-title">
           <mat-card-title>
-            <div class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
+            <div *ngIf="ride.departureDate && ride.departureTime" class="departure-time">{{ride.departureDate}} at {{ride.departureTime}}</div>
             <div class="seats-left">
               <small>{{ride.seatsAvailable}} SEATS LEFT</small>
             </div>
@@ -37,7 +37,7 @@
 
           <div class="ride-info notes">
             <small>DRIVER NOTES:</small>
-            {{ride.notes}}
+            <div *ngIf="ride.notes">{{ride.notes}}</div>
           </div>
         </mat-card-content>
       </mat-card>
