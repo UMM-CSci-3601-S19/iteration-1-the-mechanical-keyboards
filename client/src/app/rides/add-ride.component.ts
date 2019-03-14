@@ -1,11 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material';
 import {Ride} from './ride';
 import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 import {RideListComponent} from "./ride-list.component";
 import {RideListService} from "./ride-list.service";
 import {Observable} from "rxjs/Observable";
-import {AddRideValidationComponent} from "./add-ride-validation.component";
 
 @Component({
   selector: 'add-ride.component',
@@ -79,6 +77,7 @@ export class AddRideComponent implements OnInit {
           console.log('The newRide or dialogResult was ' + newRide);
           console.log('The error was ' + JSON.stringify(err));
         });
+      this.refreshRides();
     }
   };
 
@@ -109,6 +108,23 @@ export class AddRideComponent implements OnInit {
 
       notes: new FormControl('notes')
     })
+  }
+
+  refreshRides(): Observable<Ride[]> {
+    // Get Rides returns an Observable, basically a "promise" that
+    // we will get the data from the server.
+    //
+    // Subscribe waits until the data is fully downloaded, then
+    // performs an action on it (the first lambda)
+    const rides: Observable<Ride[]> = this.rideListService.getRides();
+    rides.subscribe(
+      rides => {
+        this.rides = rides;
+      },
+      err => {
+        console.log(err);
+      });
+    return rides;
   }
 
   ngOnInit() {
