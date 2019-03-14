@@ -20,6 +20,8 @@ export class AddRideComponent implements OnInit {
 
   private highlightedID: string = '';
 
+  public addRideForm: FormGroup;
+
   public rideDriver: string;
   public rideNotes: string;
   public rideSeats: number;
@@ -28,19 +30,36 @@ export class AddRideComponent implements OnInit {
   public rideDepartureDate: string;
   public rideDepartureTime: string;
 
-  public data: string[];
-
   // Inject the RideListService into this component.
-  constructor(public rideListService: RideListService) {
+  constructor(public rideListService: RideListService, private fb: FormBuilder) {
 
   }
+
+  add_ride_validation_messages = {
+    'driver': [
+      {type: 'required', message: 'Please enter your name'},
+      {type: 'minlength', message: 'Please enter your full name'},
+      {type: 'pattern', message: 'Please enter a valid name'}
+    ],
+
+    'seatsAvailable': [
+      {type: 'required', message: 'Please specify how many seats you\'re offering'},
+      {type: 'min', message: 'Please offer at least 1 seat'}
+    ],
+
+    'origin': [
+      {type: 'required', message: 'Origin is required'}
+    ],
+
+    'destination': [
+      {type: 'required', message: 'Destination is required'}
+    ]
+  };
 
   addRide(): void {
     const newRide: Ride = {_id: '', driver: this.rideDriver, notes: this.rideNotes, seatsAvailable: Number(this.rideSeats),
       origin: this.rideOrigin, destination: this.rideDestination, departureDate: this.rideDepartureDate,
       departureTime: this.rideDepartureTime};
-
-    // const data = {ride: newRide};
 
     console.log(newRide);
 
@@ -48,7 +67,6 @@ export class AddRideComponent implements OnInit {
       this.rideListService.addNewRide(newRide).subscribe(
         result => {
           this.highlightedID = result;
-          this.refreshRides();
         },
         err => {
           // This should probably be turned into some sort of meaningful response.
@@ -59,27 +77,32 @@ export class AddRideComponent implements OnInit {
     }
   };
 
-  refreshRides(): Observable<Ride[]> {
-    // Get Rides returns an Observable, basically a "promise" that
-    // we will get the data from the server.
-    //
-    // Subscribe waits until the data is fully downloaded, then
-    // performs an action on it (the first lambda)
-    const rides: Observable<Ride[]> = this.rideListService.getRides();
-    rides.subscribe(
-      rides => {
-        this.rides = rides;
-      },
-      err => {
-        console.log(err);
-      });
-    return rides;
+  createForm() {
+    this.addRideForm = this.fb.group({
+      driver: new FormControl('driver', Validators.compose([
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern('^[A-Za-z0-9\\s]+[A-Za-z0-9\\s]+$(\\.0-9+)?')
+      ])),
+
+      seatsAvailable: new FormControl('seatsAvailable', Validators.compose([
+        Validators.required,
+        Validators.min(1)
+      ])),
+
+      origin: new FormControl('origin', Validators.compose([
+        Validators.required
+      ])),
+
+      destination: new FormControl('destination', Validators.compose([
+        Validators.required
+      ]))
+    })
   }
 
-
-    ngOnInit() {
-      this.refreshRides();
-    }
+  ngOnInit() {
+    this.createForm();
+  }
 
   }
 
