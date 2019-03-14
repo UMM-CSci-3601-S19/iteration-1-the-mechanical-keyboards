@@ -42,7 +42,8 @@ export class AddRideComponent implements OnInit {
 
     'seatsAvailable': [
       {type: 'required', message: 'Please specify how many seats you\'re offering'},
-      {type: 'min', message: 'Please offer at least 1 seat'}
+      {type: 'min', message: 'Please offer at least 1 seat'},
+      {type: 'max', message: 'Can\'t offer more than 12 seats'},
     ],
 
     'origin': [
@@ -77,7 +78,6 @@ export class AddRideComponent implements OnInit {
           console.log('The newRide or dialogResult was ' + newRide);
           console.log('The error was ' + JSON.stringify(err));
         });
-      this.refreshRides();
     }
   };
 
@@ -91,7 +91,8 @@ export class AddRideComponent implements OnInit {
 
       seatsAvailable: new FormControl('seatsAvailable', Validators.compose([
         Validators.required,
-        Validators.min(1)
+        Validators.min(1),
+        Validators.max(12)
       ])),
 
       origin: new FormControl('origin', Validators.compose([
@@ -108,23 +109,6 @@ export class AddRideComponent implements OnInit {
 
       notes: new FormControl('notes')
     })
-  }
-
-  refreshRides(): Observable<Ride[]> {
-    // Get Rides returns an Observable, basically a "promise" that
-    // we will get the data from the server.
-    //
-    // Subscribe waits until the data is fully downloaded, then
-    // performs an action on it (the first lambda)
-    const rides: Observable<Ride[]> = this.rideListService.getRides();
-    rides.subscribe(
-      rides => {
-        this.rides = rides;
-      },
-      err => {
-        console.log(err);
-      });
-    return rides;
   }
 
   ngOnInit() {
