@@ -37,7 +37,7 @@
             {{ride.driver}} is offering this ride
           </div>
 
-          <mat-divider [inset]="true"></mat-divider>
+          <mat-divider [inset]="true" *ngIf="ride.notes"></mat-divider>
 
           <div  *ngIf="ride.notes" class="ride-info notes">
             <small>DRIVER NOTES:</small>
