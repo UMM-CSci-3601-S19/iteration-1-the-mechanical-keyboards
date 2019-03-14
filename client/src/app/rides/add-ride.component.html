@@ -21,39 +21,40 @@
 
           <mat-form-field>
             <input type="number" class="inputRideInfo" matInput #input id="seatsAvailableField" placeholder="Seats Available"
-                   required [(ngModel)]="rideSeats">
+                   required [(ngModel)]="rideSeats" formControlName="seatsAvailable">
           </mat-form-field>
 
           <br/>
 
           <mat-form-field>
             <input class="inputRideInfo" matInput #input id="originField" placeholder="Origin"
-                   required [(ngModel)]="rideOrigin">
+                   required [(ngModel)]="rideOrigin" formControlName="origin">
           </mat-form-field>
 
           <mat-form-field>
             <input class="inputRideInfo" matInput #input id="destinationField" placeholder="Destination"
-                   required [(ngModel)]="rideDestination">
+                   required [(ngModel)]="rideDestination" formControlName="destination">
           </mat-form-field>
 
           <br/>
 
           <mat-form-field>
             <input class="inputRideInfo" id="departureDateField" matInput [matDatepicker]="picker"
-                   placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate">
+                   placeholder="Choose Departure Date" [(ngModel)]="rideDepartureDate" formControlName="departureDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field>
             <input type="time" class="inputRideInfo" matInput #input id="departureTimeField" placeholder="Departure Time"
-                   [(ngModel)]="rideDepartureTime">
+                   [(ngModel)]="rideDepartureTime" formControlName="departureTime">
           </mat-form-field>
 
           <br/>
 
           <mat-form-field>
-            <textarea class="inputRideInfo" matInput #input id="notesField" placeholder="Notes" [(ngModel)]="rideNotes"></textarea>
+            <textarea class="inputRideInfo" matInput #input id="notesField" placeholder="Notes"
+                      [(ngModel)]="rideNotes" formControlName="notes"></textarea>
           </mat-form-field>
 
         </mat-card-content>
@@ -64,8 +65,6 @@
           </button>
           <button class="cancelRideButton" mat-button id="exitWithoutAddingButton" routerLink="/rides"  type="button">Cancel</button>
         </mat-card-actions>
-
-
 
       </mat-card>
     </form>

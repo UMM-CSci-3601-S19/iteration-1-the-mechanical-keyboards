@@ -85,4 +85,36 @@ describe('Ride list service: ', () => {
     // actually being performed.
     req.flush(testRides);
   });
+
+  it('successfully adds a ride while leaving optional fields empty', () => {
+    const ride_id = 'ride_id';
+    const newRide: Ride = {
+      _id: '',
+      driver: 'Jesse',
+      seatsAvailable: 72,
+      origin: 'UMM',
+      destination: 'Alexandria',
+      departureDate: '',
+      departureTime: '',
+      notes: ''
+    };
+
+    rideListService.addNewRide(newRide).subscribe(
+      id => {
+        expect(id).toBe(ride_id);
+      },
+      err => {
+        expect(err).toBeNull();
+      }
+    );
+
+    // Specify that (exactly) one request will be made to the specified URL.
+    const req = httpTestingController.expectOne(rideListService.baseUrl + '/new');
+    // Check that the request made to that URL was a POST request.
+    expect(req.request.method).toEqual('POST');
+    // Specify the content of the response to that request. This
+    // triggers the subscribe above, which leads to that check
+    // actually being performed.
+    req.flush(testRides);
+  });
 });

@@ -57,9 +57,14 @@ export class AddRideComponent implements OnInit {
   };
 
   addRide(): void {
-    const newRide: Ride = {_id: '', driver: this.rideDriver, notes: this.rideNotes, seatsAvailable: Number(this.rideSeats),
-      origin: this.rideOrigin, destination: this.rideDestination, departureDate: this.rideDepartureDate,
-      departureTime: this.rideDepartureTime};
+    const newRide: Ride = {_id: '',
+      driver: this.rideDriver,
+      notes: this.rideNotes || '',
+      seatsAvailable: Number(this.rideSeats),
+      origin: this.rideOrigin,
+      destination: this.rideDestination,
+      departureDate: this.rideDepartureDate || '',
+      departureTime: this.rideDepartureTime || ''};
 
     console.log(newRide);
 
@@ -96,7 +101,13 @@ export class AddRideComponent implements OnInit {
 
       destination: new FormControl('destination', Validators.compose([
         Validators.required
-      ]))
+      ])),
+
+      departureDate: new FormControl('departureDate'),
+
+      departureTime: new FormControl('departureTime'),
+
+      notes: new FormControl('notes')
     })
   }
 
